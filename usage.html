@@ -16,8 +16,8 @@
        data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_green_007200.png"
        alt="GitHub badge" title="Fork me on GitHub">
 </a>
-<a class="badge latest-version" href="https://media.luffy.cx/files/lldpd/lldpd-1.0.4.tar.gz">
-  <div title="Download latest version of lldpd">1.0.4</div>
+<a class="badge latest-version" href="https://media.luffy.cx/files/lldpd/lldpd-1.0.5.tar.gz">
+  <div title="Download latest version of lldpd">1.0.5</div>
 </a>
 
   <nav>
@@ -52,7 +52,7 @@ the daemon. Both parts are documented in their manual&nbsp;pages:</p>
 </ul>
 </div>
 <h1 id="lldpd8">lldpd.8</h1>
-<p>Here is the manual page for <code>lldpd</code> (version&nbsp;1.0.4):</p>
+<p>Here is the manual page for <code>lldpd</code> (version&nbsp;1.0.5):</p>
 <div class='manpage'><div><b><span class="caps">NAME</span></b>
      <b>lldpd</b> &#8212; <span class="caps">LLDP</span> daemon
 
@@ -192,7 +192,9 @@ the daemon. Both parts are documented in their manual&nbsp;pages:</p>
              as a management address without any check. If only negative
              patterns are provided, only one IPv4 and one IPv6 addresses are
              chosen. Otherwise, many of them can be selected. If you want to
-             blacklist IPv6 addresses, you can use <u>!*:*</u>.
+             blacklist IPv6 addresses, you can use <u>!*:*</u>.  If an interface
+             name is matched, the first IPv4 address and the first IPv6 ad-
+             dress associated to this interface will be chosen.
 
      <b>-u</b> <u>file</u>
              Specify the Unix-domain socket used for communication with
@@ -351,7 +353,7 @@ the daemon. Both parts are documented in their manual&nbsp;pages:</p>
      &lt;pyr@openbsd.org&gt;, and Vincent Bernat &lt;bernat@luffy.cx&gt;.</div></div>
 
 <h1 id="lldpcli8">lldpcli.8</h1>
-<p>Here is the manual page for <code>lldpcli</code> and <code>lldpctl</code> (version&nbsp;1.0.4):</p>
+<p>Here is the manual page for <code>lldpcli</code> and <code>lldpctl</code> (version&nbsp;1.0.5):</p>
 <div class='manpage'><div><b><span class="caps">NAME</span></b>
      <b>lldpcli</b>, <b>lldpctl</b> &#8212; control <span class="caps">LLDP</span> daemon
 
@@ -600,7 +602,9 @@ the daemon. Both parts are documented in their manual&nbsp;pages:</p>
              as a management address without any check. If only negative
              patterns are provided, only one IPv4 and one IPv6 addresses are
              chosen. Otherwise, many of them can be selected. If you want to
-             blacklist IPv6 addresses, you can use <u>!*:*</u>.
+             blacklist IPv6 addresses, you can use <u>!*:*</u>.  If an interface
+             name is matched, the first IPv4 address and the first IPv6 ad-
+             dress associated to this interface will be chosen.
 
        <b>unconfigure</b> <b>system</b> <b>ip</b> <b>management</b> <b>pattern</b>
 
@@ -668,7 +672,17 @@ the daemon. Both parts are documented in their manual&nbsp;pages:</p>
 
              Change transmit delay to the specified value in seconds. The
              transmit delay is the delay between two transmissions of <span class="caps">LLDP</span>
-             <span class="caps">PDU</span>. The default value is 30 seconds.
+             <span class="caps">PDU</span>. The default value is 30 seconds. Note: <b>lldpd</b> also starts
+             another system based refresh timer on each port to detect
+             changes such as a hostname. This is the value of the tx-inter-
+             val multiplied by 20.
+
+             You can specify an <b>interval</b> value in milliseconds by appending
+             a &#8220;ms&#8221; suffix to the figure (e.g.  &#8220;configure lldp tx-interval
+             1500ms&#8221; is 1.5s, not 1500s). In this case the <span class="caps">TTL</span> for received
+             and sent <span class="caps">LLDP</span> frames is rounded up to the next second. Note:
+             the effective interval can be limited by the operating system
+             capabilities and <span class="caps">CPU</span> speed.
 
        <b>configure</b> <b>lldp</b> <b>tx-hold</b> <u>hold</u>
 
@@ -897,7 +911,7 @@ the daemon. Both parts are documented in their manual&nbsp;pages:</p>
                    5000
 
        <b>configure</b> [ports <u>ethX</u> [,&#8230;]] <b>dot3</b> <b>power</b> <b>pse</b> | <b>pd</b> [<b>supported</b>]
-       [<b>enabled</b>] [<b>paircontrol</b>] <b>powerpairs</b> <u>powerpairs</u> [<b>class</b> <u>class</u>] [<b>type</b>
+       [<b>enabled</b>] [<b>paircontrol</b>] [<b>powerpairs</b> <u>powerpairs</u>] [<b>class</b> <u>class</u>] [<b>type</b>
        <u>type</u> <b>source</b> <u>source</u> <b>priority</b> <u>priority</u> <b>requested</b> <u>requested</u> <b>allocated</b>
        <u>allocated</u>]
 
