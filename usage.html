@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
   <link rel="canonical" href="https://vincentbernat.github.com/lldpd//lldpd/usage.html">
   <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Inconsolata|Libre+Baskerville:400,400italic,700" type="text/css">
-  <link rel="stylesheet" href="/lldpd/media/css/lldpd.93daf4b8.css" type="text/css">
+  <link rel="stylesheet" href="/lldpd/media/css/lldpd.cea6ce9e.css" type="text/css">
   <script src="/lldpd/media/js/mp.e3771c26.js"></script>
 </head>
 <body>
@@ -16,8 +16,8 @@
        data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_green_007200.png"
        alt="GitHub badge" title="Fork me on GitHub">
 </a>
-<a class="badge latest-version" href="https://media.luffy.cx/files/lldpd/lldpd-1.0.5.tar.gz">
-  <div title="Download latest version of lldpd">1.0.5</div>
+<a class="badge latest-version" href="https://media.luffy.cx/files/lldpd/lldpd-1.0.6.tar.gz">
+  <div title="Download latest version of lldpd">1.0.6</div>
 </a>
 
   <nav>
@@ -52,7 +52,7 @@ the daemon. Both parts are documented in their manual&nbsp;pages:</p>
 </ul>
 </div>
 <h1 id="lldpd8">lldpd.8</h1>
-<p>Here is the manual page for <code>lldpd</code> (version&nbsp;1.0.5):</p>
+<p>Here is the manual page for <code>lldpd</code> (version&nbsp;1.0.6):</p>
 <div class='manpage'><div><b><span class="caps">NAME</span></b>
      <b>lldpd</b> &#8212; <span class="caps">LLDP</span> daemon
 
@@ -129,7 +129,7 @@ the daemon. Both parts are documented in their manual&nbsp;pages:</p>
 
      <b>-k</b>      Disable advertising of kernel release, version and machine.
              Kernel name (ie: Linux) will still be shared, and Inventory
-             software version will be set to &#8216;Unknown&#8217;.
+             software version will be set to &#x27;Unknown&#x27;.
 
      <b>-S</b> <u>description</u>
              Override system description with the provided description. The
@@ -192,9 +192,9 @@ the daemon. Both parts are documented in their manual&nbsp;pages:</p>
              as a management address without any check. If only negative
              patterns are provided, only one IPv4 and one IPv6 addresses are
              chosen. Otherwise, many of them can be selected. If you want to
-             blacklist IPv6 addresses, you can use <u>!*:*</u>.  If an interface
-             name is matched, the first IPv4 address and the first IPv6 ad-
-             dress associated to this interface will be chosen.
+             remove IPv6 addresses, you can use <u>!*:*</u>.  If an interface name
+             is matched, the first IPv4 address and the first IPv6 address
+             associated to this interface will be chosen.
 
      <b>-u</b> <u>file</u>
              Specify the Unix-domain socket used for communication with
@@ -204,18 +204,17 @@ the daemon. Both parts are documented in their manual&nbsp;pages:</p>
              Specify which interface to listen and send <span class="caps">LLDPDU</span> to. Without
              this option, <b>lldpd</b> will use all available physical interfaces.
              This option can use wildcards. Several interfaces can be speci-
-             fied separated by commas.  It is also possible to blacklist an
-             interface by suffixing it with an exclamation mark. It is pos-
-             sible to whitelist an interface by suffixing it with two excla-
-             mation marks. A whitelisted interface beats a blacklisted in-
-             terface which beats a simple matched interface. For example,
-             with <u>eth*,!eth1,!eth2</u> <b>lldpd</b> will only use interfaces starting
-             by <u>eth</u> with the exception of <u>eth1</u> and <u>eth2</u>.  While with
-             <u>*,!eth*,!!eth1</u> <b>lldpd</b> will use all interfaces, except interfaces
-             starting by <u>eth</u> with the exception of <u>eth1</u>.  When an exact
-             match is found, it will circumvent some tests. For example, if
-             <u>eth0.12</u> is specified, it will be accepted even if this is a
-             <span class="caps">VLAN</span> interface.
+             fied separated by commas.  It is also possible to remove an in-
+             terface by prefixing it with an exclamation mark. It is possi-
+             ble to allow an interface by prefixing it with two exclamation
+             marks. An allowed interface beats a forbidden interface which
+             beats a simple matched interface. For example, with
+             <u>eth*,!eth1,!eth2</u> <b>lldpd</b> will only use interfaces starting by <u>eth</u>
+             with the exception of <u>eth1</u> and <u>eth2</u>.  While with <u>*,!eth*,!!eth1</u>
+             <b>lldpd</b> will use all interfaces, except interfaces starting by
+             <u>eth</u> with the exception of <u>eth1</u>.  When an exact match is found,
+             it will circumvent some tests. For example, if <u>eth0.12</u> is spec-
+             ified, it will be accepted even if this is a <span class="caps">VLAN</span> interface.
 
      <b>-C</b> <u>interfaces</u>
              Specify which interfaces to use for computing chassis <span class="caps">ID</span>. With-
@@ -224,8 +223,8 @@ the daemon. Both parts are documented in their manual&nbsp;pages:</p>
              to compute the chassis <span class="caps">ID</span>. The logic of this option is the same
              as for <b>-I</b> flag: you can exclude interfaces with an exclamation
              mark and use globbing to specify several interfaces. If all in-
-             terfaces are blacklisted (with <u>!*</u>), the system name is used as
-             a chassis <span class="caps">ID</span> instead.
+             terfaces are removed (with <u>!*</u>), the system name is used as a
+             chassis <span class="caps">ID</span> instead.
 
      <b>-M</b> <u>class</u>
              Enable emission of <span class="caps">LLDP</span>-<span class="caps">MED</span> frame. Depending on the selected
@@ -243,7 +242,7 @@ the daemon. Both parts are documented in their manual&nbsp;pages:</p>
 
      <b>-i</b>      Disable <span class="caps">LLDP</span>-<span class="caps">MED</span> inventory <span class="caps">TLV</span> transmission.  <b>lldpd</b> will still
              receive (and publish using <span class="caps">SNMP</span> if enabled) those <span class="caps">LLDP</span>-<span class="caps">MED</span> <span class="caps">TLV</span>
-             but will not send them. Use this option if you don&#8217;t want to
+             but will not send them. Use this option if you don&#x27;t want to
              transmit sensible information like serial numbers.
 
      <b>-H</b> <u>hide</u>
@@ -353,7 +352,7 @@ the daemon. Both parts are documented in their manual&nbsp;pages:</p>
      &lt;pyr@openbsd.org&gt;, and Vincent Bernat &lt;bernat@luffy.cx&gt;.</div></div>
 
 <h1 id="lldpcli8">lldpcli.8</h1>
-<p>Here is the manual page for <code>lldpcli</code> and <code>lldpctl</code> (version&nbsp;1.0.5):</p>
+<p>Here is the manual page for <code>lldpcli</code> and <code>lldpctl</code> (version&nbsp;1.0.6):</p>
 <div class='manpage'><div><b><span class="caps">NAME</span></b>
      <b>lldpcli</b>, <b>lldpctl</b> &#8212; control <span class="caps">LLDP</span> daemon
 
@@ -470,7 +469,7 @@ the daemon. Both parts are documented in their manual&nbsp;pages:</p>
 
              Override system hostname with the provided value. By default,
              the system name is the <span class="caps">FQDN</span> found from the resolved value of
-             <b>uname</b> <b>-n</b>.  As a special value, use &#8220;.&#8221; (dot) to use the short
+             <b>uname</b> <b>-n</b>.  As a special value, use &quot;.&quot; (dot) to use the short
              hostname instead of a <span class="caps">FQDN</span>.
 
        <b>unconfigure</b> <b>system</b> <b>hostname</b>
@@ -516,18 +515,17 @@ the daemon. Both parts are documented in their manual&nbsp;pages:</p>
              Specify which interface to listen and send <span class="caps">LLDPDU</span> to. Without
              this option, <b>lldpd</b> will use all available physical interfaces.
              This option can use wildcards. Several interfaces can be speci-
-             fied separated by commas.  It is also possible to blacklist an
-             interface by suffixing it with an exclamation mark. It is pos-
-             sible to whitelist an interface by suffixing it with two excla-
-             mation marks. A whitelisted interface beats a blacklisted in-
-             terfaces which beats a simple matched interface. For example,
-             with <u>eth*,!eth1,!eth2</u> <b>lldpd</b> will only use interfaces starting
-             by <u>eth</u> with the exception of <u>eth1</u> and <u>eth2</u>.  While with
-             <u>*,!eth*,!!eth1</u> <b>lldpcli</b> will use all interfaces, except inter-
-             faces starting by <u>eth</u> with the exception of <u>eth1</u>.  When an ex-
-             act match is found, it will circumvent some tests. For example,
-             if <u>eth0.12</u> is specified, it will be accepted even if this is a
-             <span class="caps">VLAN</span> interface.
+             fied separated by commas.  It is also possible to remove an in-
+             terface by prefixing it with an exclamation mark. It is possi-
+             ble to allow an interface by prefixing it with two exclamation
+             marks. An allowed interface beats a forbidden interfaces which
+             beats a simple matched interface. For example, with
+             <u>eth*,!eth1,!eth2</u> <b>lldpd</b> will only use interfaces starting by <u>eth</u>
+             with the exception of <u>eth1</u> and <u>eth2</u>.  While with <u>*,!eth*,!!eth1</u>
+             <b>lldpcli</b> will use all interfaces, except interfaces starting by
+             <u>eth</u> with the exception of <u>eth1</u>.  When an exact match is found,
+             it will circumvent some tests. For example, if <u>eth0.12</u> is spec-
+             ified, it will be accepted even if this is a <span class="caps">VLAN</span> interface.
 
        <b>unconfigure</b> <b>system</b> <b>interface</b> <b>pattern</b>
 
@@ -602,9 +600,9 @@ the daemon. Both parts are documented in their manual&nbsp;pages:</p>
              as a management address without any check. If only negative
              patterns are provided, only one IPv4 and one IPv6 addresses are
              chosen. Otherwise, many of them can be selected. If you want to
-             blacklist IPv6 addresses, you can use <u>!*:*</u>.  If an interface
-             name is matched, the first IPv4 address and the first IPv6 ad-
-             dress associated to this interface will be chosen.
+             remove IPv6 addresses, you can use <u>!*:*</u>.  If an interface name
+             is matched, the first IPv4 address and the first IPv6 address
+             associated to this interface will be chosen.
 
        <b>unconfigure</b> <b>system</b> <b>ip</b> <b>management</b> <b>pattern</b>
 
@@ -678,8 +676,8 @@ the daemon. Both parts are documented in their manual&nbsp;pages:</p>
              val multiplied by 20.
 
              You can specify an <b>interval</b> value in milliseconds by appending
-             a &#8220;ms&#8221; suffix to the figure (e.g.  &#8220;configure lldp tx-interval
-             1500ms&#8221; is 1.5s, not 1500s). In this case the <span class="caps">TTL</span> for received
+             a &quot;ms&quot; suffix to the figure (e.g.  &quot;configure lldp tx-interval
+             1500ms&quot; is 1.5s, not 1500s). In this case the <span class="caps">TTL</span> for received
              and sent <span class="caps">LLDP</span> frames is rounded up to the next second. Note:
              the effective interval can be limited by the operating system
              capabilities and <span class="caps">CPU</span> speed.
@@ -697,13 +695,21 @@ the daemon. Both parts are documented in their manual&nbsp;pages:</p>
              Configure the administrative status of the given port. By de-
              fault, all ports are configured to be in <u>rx-and-tx</u> mode. This
              means they can receive and transmit <span class="caps">LLDP</span> frames (as well as
-             other protocols if needed). In <u>rx-only</u> mode, they won&#8217;t emit
-             any frames and in <u>tx-only</u> mode, they won&#8217;t receive any frames.
+             other protocols if needed). In <u>rx-only</u> mode, they won&#x27;t emit
+             any frames and in <u>tx-only</u> mode, they won&#x27;t receive any frames.
              In <u>disabled</u> mode, no frame will be sent and any incoming frame
              will be discarded. This setting does not override the opera-
              tional mode of the main daemon. If it is configured in receive-
-             only mode (with the <b>-r</b> flag), setting any transmit mode won&#8217;t
+             only mode (with the <b>-r</b> flag), setting any transmit mode won&#x27;t
              have any effect.
+
+       <b>configure</b> [ports <u>ethX</u> [,&#8230;]] <b>lldp</b> <b>vlan-tx</b> <u>vlan</u><b>_</b><u>id</u> [<b>prio</b> <u>priority</u>
+       [<b>dei</b> <u>dei</u>]]
+
+             Configure the given port to send <span class="caps">LLDP</span> frames over a specified
+             <span class="caps">VLAN</span>. With <span class="caps">VLAN</span> Identifier (<span class="caps">VID</span>) as <u>vlan</u><b>_</b><u>id</u>, Priority Code
+             Point (<span class="caps">PCP</span>) as <u>priority</u>, and Drop Eligible Indicator (<span class="caps">DEI</span>) as
+             <u>dei</u>.  <b>lldpd</b> accepts <span class="caps">LLDP</span> frames on all VLANs.
 
        <b>configure</b> <b>lldp</b> <b>custom-tlv</b> [<b>add</b> | <b>replace</b>] <b>oui</b> <u>oui</u> <b>subtype</b> <u>subtype</u>
        [<b>oui-info</b> <u>content</u>]
@@ -789,7 +795,7 @@ the daemon. Both parts are documented in their manual&nbsp;pages:</p>
 
              A valid use of this command is:
                    configure ports eth1 med location address country <span class="caps">US</span>
-                   street &#8220;Commercial Road&#8221; city &#8220;Roseville&#8221;
+                   street &quot;Commercial Road&quot; city &quot;Roseville&quot;
 
        <b>configure</b> [ports <u>ethX</u> [,&#8230;]] <b>med</b> <b>location</b> <b>elin</b> <u>number</u>
 
