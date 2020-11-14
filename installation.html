@@ -4,14 +4,14 @@
   <meta charset="utf-8">
     <title>lldpd » implementation of IEEE 802.1AB | Installation</title>
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
-  <link rel="canonical" href="https://vincentbernat.github.com/lldpd//lldpd/installation.html">
+  <link rel="canonical" href="https://lldpd.github.com//lldpd/installation.html">
   <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Inconsolata|Libre+Baskerville:400,400italic,700" type="text/css">
   <link rel="stylesheet" href="/lldpd/media/css/lldpd.cea6ce9e.css" type="text/css">
   <script src="/lldpd/media/js/mp.e3771c26.js"></script>
 </head>
 <body>
 
-  <a class="badge github-forkme" href="https://github.com/vincentbernat/lldpd">
+  <a class="badge github-forkme" href="https://github.com/lldpd/lldpd">
   <img src="https://camo.githubusercontent.com/e7bbb0521b397edbd5fe43e7f760759336b5e05f/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f677265656e5f3030373230302e706e67"
        data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_green_007200.png"
        alt="GitHub badge" title="Fork me on GitHub">
@@ -130,7 +130,7 @@ command instead or install the <span class="caps">GNU</span> Readline library on
 <a href="https://media.luffy.cx/files/lldpd/lldpd-1.0.7.pkg" title="lldpd 1.0.7 version for OSX">installer package for macOS</a>. You need at least macOS&nbsp;10.6.</p>
 <p>Alternatively, you can use <a href="http://brew.sh/" title="Homebrew: the missing package manager for macOS">Homebrew</a>. Check the website if you
 don&#8217;t have it, it is easy to install. Once installed, type in a&nbsp;terminal:</p>
-<div class="codehilite"><pre><span></span><span class="gp">$</span> brew install https://raw.github.com/vincentbernat/lldpd/master/osx/lldpd.rb
+<div class="codehilite"><pre><span></span><span class="gp">$</span> brew install https://raw.github.com/lldpd/lldpd/master/osx/lldpd.rb
 <span class="gp">#</span><span class="c1">####################################################################### 100.0%</span>
 <span class="go">==&gt; Downloading https://media.luffy.cx/files/lldpd/lldpd-1.0.7.tar.gz</span>
 <span class="go">==&gt; ./configure --prefix=/usr/local/Cellar/lldpd/1.0.7 --with-xml --with-readline</span>
@@ -181,7 +181,7 @@ build&nbsp;environment.</p>
 </pre></div>
 
 
-<p>If this steps fail, feel free to <a href="https://github.com/vincentbernat/lldpd/issues" title="GitHub bug tracker for lldpd">file a bug report</a>. The content
+<p>If this steps fail, feel free to <a href="https://github.com/lldpd/lldpd/issues" title="GitHub bug tracker for lldpd">file a bug report</a>. The content
 of <code>config.log</code> should be helpful. Otherwise, check if everything is
 as you expect and&nbsp;continue.</p>
 <div class="codehilite"><pre><span></span><span class="gp">$</span> make
@@ -193,7 +193,7 @@ as you expect and&nbsp;continue.</p>
 </pre></div>
 
 
-<p>If this steps fail, feel free to <a href="https://github.com/vincentbernat/lldpd/issues" title="GitHub bug tracker for lldpd">file a bug report</a> too with the
+<p>If this steps fail, feel free to <a href="https://github.com/lldpd/lldpd/issues" title="GitHub bug tracker for lldpd">file a bug report</a> too with the
 output and some details on your platform. The <code>config.log</code> is also
 useful in this&nbsp;case.</p>
 <p>You can finish the installation with <code>make install</code>. Then, you still
