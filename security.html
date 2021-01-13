@@ -49,11 +49,11 @@ security issue, either open an <a href="https://github.com/lldpd/lldpd/issues/ne
 <ul>
 <li>
 <p><a href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-27827"><span class="caps">CVE</span>-2020-27827</a>: memory exhaustion attack through crafted <span class="caps">LLDPU</span>
-   with some duplicate TLVs. A remote device can send <span class="caps">LLDPU</span> with a
-   duplicate port description, system name, or system description <span class="caps">TLV</span>.
-   The vulnerability does not allow arbitrary code execution. This bug
-   is present since the initial release. It has been fixed in commit
-   <a href="https://github.com/lldpd/lldpd/commit/a8d3c90feca548fc0656d95b5d278713db86ff61">a8d3c90f</a> and in version&nbsp;1.0.8.</p>
+   with duplicate TLVs. A remote device can send <span class="caps">LLDPU</span> with a
+   duplicate port description, system name, or system description <span class="caps">TLV</span>
+   and trigger a memory leak. The vulnerability does not allow
+   arbitrary code execution. This bug is present since the initial
+   release. It has been fixed in commit <a href="https://github.com/lldpd/lldpd/commit/a8d3c90feca548fc0656d95b5d278713db86ff61">a8d3c90f</a> and in version&nbsp;1.0.8.</p>
 </li>
 <li>
 <p><a href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-8011"><span class="caps">CVE</span>-2015-8011</a>: buffer overflow when handling management address
