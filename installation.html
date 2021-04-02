@@ -16,8 +16,8 @@
        data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_green_007200.png"
        alt="GitHub badge" title="Fork me on GitHub">
 </a>
-<a class="badge latest-version" href="https://media.luffy.cx/files/lldpd/lldpd-1.0.8.tar.gz">
-  <div title="Download latest version of lldpd">1.0.8</div>
+<a class="badge latest-version" href="https://media.luffy.cx/files/lldpd/lldpd-1.0.9.tar.gz">
+  <div title="Download latest version of lldpd">1.0.9</div>
 </a>
 
   <nav>
@@ -62,7 +62,7 @@ sources. Once installed, you may want to look
 <h1 id="gnulinux"><span class="caps">GNU</span>/Linux</h1>
 <h2 id="debian-and-ubuntu">Debian and&nbsp;Ubuntu</h2>
 <p><code>lldpd</code> is already available in Debian and Ubuntu. You can install it&nbsp;with:</p>
-<div class="codehilite"><pre><span></span><span class="gp">$</span> sudo apt-get install lldpd
+<div class="codehilite"><pre><span></span><span class="gp">$ </span>sudo apt-get install lldpd
 <span class="go">Reading package lists... Done</span>
 <span class="go">Building dependency tree       </span>
 <span class="go">Reading state information... Done</span>
@@ -97,7 +97,7 @@ the&nbsp;website.</p>
 <h2 id="suse"><span class="caps">SUSE</span></h2>
 <p>On <span class="caps">SLES</span> 12, openSUSE Leap 42.3 or openSUSE Tumbleweed, <code>lldpd</code> is
 available directly with the following&nbsp;command:</p>
-<div class="codehilite"><pre><span></span><span class="gp">$</span> sudo zypper install lldpd
+<div class="codehilite"><pre><span></span><span class="gp">$ </span>sudo zypper install lldpd
 <span class="go">The following 11 NEW packages are going to be installed:</span>
 <span class="go">  libbsd0 libdb-4_8 libevent-2_0-5 libgdbm4 liblldpctl4 libsensors4 libsnmp30 libwrap0 lldpd perl snmp-mibs</span>
 
@@ -127,13 +127,13 @@ in <code>/etc/group</code>. The user must not be able to login, have its home as
 command instead or install the <span class="caps">GNU</span> Readline library on your&nbsp;system.</p>
 <h1 id="macos">macOS</h1>
 <p>The easiest way is to use the
-<a href="https://media.luffy.cx/files/lldpd/lldpd-1.0.8.pkg" title="lldpd 1.0.8 version for OSX">installer package for macOS</a>. You need at least macOS&nbsp;10.6.</p>
+<a href="https://media.luffy.cx/files/lldpd/lldpd-1.0.9.pkg" title="lldpd 1.0.9 version for OSX">installer package for macOS</a>. You need at least macOS&nbsp;10.6.</p>
 <p>Alternatively, you can use <a href="http://brew.sh/" title="Homebrew: the missing package manager for macOS">Homebrew</a>. Check the website if you
 don&#8217;t have it, it is easy to install. Once installed, type in a&nbsp;terminal:</p>
-<div class="codehilite"><pre><span></span><span class="gp">$</span> brew install https://raw.github.com/lldpd/lldpd/master/osx/lldpd.rb
+<div class="codehilite"><pre><span></span><span class="gp">$ </span>brew install https://raw.github.com/lldpd/lldpd/master/osx/lldpd.rb
 <span class="gp">#</span><span class="c1">####################################################################### 100.0%</span>
-<span class="go">==&gt; Downloading https://media.luffy.cx/files/lldpd/lldpd-1.0.8.tar.gz</span>
-<span class="go">==&gt; ./configure --prefix=/usr/local/Cellar/lldpd/1.0.8 --with-xml --with-readline</span>
+<span class="go">==&gt; Downloading https://media.luffy.cx/files/lldpd/lldpd-1.0.9.tar.gz</span>
+<span class="go">==&gt; ./configure --prefix=/usr/local/Cellar/lldpd/1.0.9 --with-xml --with-readline</span>
 <span class="go">[...]</span>
 </pre></div>
 
@@ -145,14 +145,14 @@ when the system&nbsp;starts.</p>
 <h1 id="install-from-source">Install from&nbsp;source</h1>
 <p>This is the last resort method. Other methods are usually&nbsp;simpler.</p>
 <p>You first need to download the latest version
-(<a href="https://media.luffy.cx/files/lldpd/lldpd-1.0.8.tar.gz" title="lldpd 1.0.8 version">1.0.8</a>) (do not download it
+(<a href="https://media.luffy.cx/files/lldpd/lldpd-1.0.9.tar.gz" title="lldpd 1.0.9 version">1.0.9</a>) (do not download it
 from GitHub, you would get an incomplete archive). You need a working
 build&nbsp;environment.</p>
-<div class="codehilite"><pre><span></span><span class="gp">$</span> tar zxvf lldpd-1.0.8.tar.gz
-<span class="gp">$</span> <span class="nb">cd</span> lldpd-1.0.8
-<span class="gp">$</span> mkdir build
-<span class="gp">$</span> <span class="nb">cd</span> build
-<span class="gp">$</span> ../configure
+<div class="codehilite"><pre><span></span><span class="gp">$ </span>tar zxvf lldpd-1.0.9.tar.gz
+<span class="gp">$ </span><span class="nb">cd</span> lldpd-1.0.9
+<span class="gp">$ </span>mkdir build
+<span class="gp">$ </span><span class="nb">cd</span> build
+<span class="gp">$ </span>../configure
 <span class="go">checking for a BSD-compatible install... /usr/bin/install -c</span>
 <span class="go">checking whether build environment is sane... yes</span>
 <span class="go">checking for a thread-safe mkdir -p... /bin/mkdir -p</span>
@@ -184,12 +184,12 @@ build&nbsp;environment.</p>
 <p>If this steps fail, feel free to <a href="https://github.com/lldpd/lldpd/issues" title="GitHub bug tracker for lldpd">file a bug report</a>. The content
 of <code>config.log</code> should be helpful. Otherwise, check if everything is
 as you expect and&nbsp;continue.</p>
-<div class="codehilite"><pre><span></span><span class="gp">$</span> make
+<div class="codehilite"><pre><span></span><span class="gp">$ </span>make
 <span class="go">  CC     strlcpy.lo</span>
 <span class="go">  CCLD   libcompat.la</span>
 <span class="go">  CC     log.lo</span>
 <span class="go">[...]</span>
-<span class="go">make[1]: Leaving directory `/home/bernat/src/lldpd-1.0.8&#39;</span>
+<span class="go">make[1]: Leaving directory `/home/bernat/src/lldpd-1.0.9&#39;</span>
 </pre></div>
 
 
