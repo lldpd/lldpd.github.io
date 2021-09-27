@@ -87,10 +87,14 @@ well as a working init&nbsp;script.</p>
 <p><code>lldpd</code> is available in portage. Just issue the command <code>emerge lldpd</code>
 to install it. You can also <a href="#install-from-source">build <em>lldpd</em> from source</a>.</p>
 <h2 id="fedora-rhel-centos">Fedora, <span class="caps">RHEL</span>,&nbsp;CentOS</h2>
-<p><code>lldpd</code> is available from <a href="https://fedoraproject.org/wiki/EPEL" title="EPEL"><span class="caps">EPEL</span></a>. First, you need to install the
-<code>epel-release</code> package, then just install with <code>yum install lldpd</code> or
-<code>dnf install lldpd</code>. Once installed, you can change the options
-provided to <code>lldpd</code> in <code>/etc/sysconfig/lldpd</code>.</p>
+<p><code>lldpd</code> is available in the main Fedora and <span class="caps">RHEL</span> 8 repositories.
+Just issue the command <code>dnf install lldpd</code> to install&nbsp;it.</p>
+<p>For older distro versions, like <span class="caps">RHEL</span> 7, it is available from the
+<a href="https://fedoraproject.org/wiki/EPEL"><span class="caps">EPEL</span></a> repository. In this case,
+you need to install the <code>epel-release</code> package before issuing the
+<code>yum install lldpd</code> command.</p>
+<p>Once the <code>lldpd</code> package is installed, you can change its options via
+the <code>/etc/sysconfig/lldpd</code> file.</p>
 <p>Alternatively, you can install the packages
 from <a href="http://software.opensuse.org/download.html?project=home:vbernat&amp;package=lldpd" title="lldpd on OSC">openSUSE Build Service</a>. Follow the instructions available on
 the&nbsp;website.</p>
