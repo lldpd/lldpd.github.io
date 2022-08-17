@@ -16,8 +16,8 @@
        data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_green_007200.png"
        alt="GitHub badge" title="Fork me on GitHub">
 </a>
-<a class="badge latest-version" href="https://media.luffy.cx/files/lldpd/lldpd-1.0.14.tar.gz">
-  <div title="Download latest version of lldpd">1.0.14</div>
+<a class="badge latest-version" href="https://media.luffy.cx/files/lldpd/lldpd-1.0.15.tar.gz">
+  <div title="Download latest version of lldpd">1.0.15</div>
 </a>
 
   <nav>
@@ -52,7 +52,7 @@ the daemon. Both parts are documented in their manual&nbsp;pages:</p>
 </ul>
 </div>
 <h1 id="lldpd8">lldpd.8</h1>
-<p>Here is the manual page for <code>lldpd</code> (version&nbsp;1.0.14):</p>
+<p>Here is the manual page for <code>lldpd</code> (version&nbsp;1.0.15):</p>
 <div class='manpage'><div><b><span class="caps">NAME</span></b>
      <b>lldpd</b> &#8212; <span class="caps">LLDP</span> daemon
 
@@ -353,7 +353,7 @@ the daemon. Both parts are documented in their manual&nbsp;pages:</p>
      &lt;pyr@openbsd.org&gt;, and Vincent Bernat &lt;bernat@luffy.cx&gt;.</div></div>
 
 <h1 id="lldpcli8">lldpcli.8</h1>
-<p>Here is the manual page for <code>lldpcli</code> and <code>lldpctl</code> (version&nbsp;1.0.14):</p>
+<p>Here is the manual page for <code>lldpcli</code> and <code>lldpctl</code> (version&nbsp;1.0.15):</p>
 <div class='manpage'><div><b><span class="caps">NAME</span></b>
      <b>lldpcli</b>, <b>lldpctl</b> &#8212; control <span class="caps">LLDP</span> daemon
 
@@ -509,6 +509,28 @@ the daemon. Both parts are documented in their manual&nbsp;pages:</p>
        <b>unconfigure</b> <b>system</b> <b>platform</b>
 
              Do not override platform description and use the kernel name.
+             This option undoes the previous one.
+
+       <b>configure</b> <b>system</b> <b>capabilities</b> <b>enabled</b> <u>capabilities</u>
+
+             Override system capabilities with the provided value instead of
+             using kernel information. Several capabilities can be specified
+             separated by commas. Only available capabilities can be en-
+             abled. Valid capabilities are:
+               <b>other</b>
+               <b>repeater</b>
+               <b>bridge</b>
+               <b>wlan</b>
+               <b>router</b>
+               <b>telephone</b>
+               <b>docsis</b>
+               <b>station</b>
+             Here is an example of use:
+                   configure system capabilities enabled bridge,router
+
+       <b>unconfigure</b> <b>system</b> <b>capabilities</b> <b>enabled</b>
+
+             Do not override capabilities and use the kernel information.
              This option undoes the previous one.
 
        <b>configure</b> <b>system</b> <b>interface</b> <b>pattern</b> <u>pattern</u>
