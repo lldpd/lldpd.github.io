@@ -171,11 +171,23 @@ explain how to create <code>_lldpd</code> user and group and how to run <code>ll
 when the system&nbsp;starts.</p>
 <p>At least, you can <a href="#install-from-source">build <em>lldpd</em> from source</a>.</p>
 <h1 id="install-from-source">Install from&nbsp;source</h1>
-<p>This is the last resort method. Other methods are usually&nbsp;simpler.</p>
-<p>You first need to download the latest version
-(<a href="https://media.luffy.cx/files/lldpd/lldpd-1.0.16.tar.gz" title="lldpd 1.0.16 version">1.0.16</a>) (do not download it
-from GitHub, you would get an incomplete archive). You need a working
-build&nbsp;environment.</p>
+<p>This is the last resort method. Other methods are usually simpler. You need a
+working build&nbsp;environment.</p>
+<p>First, download the tarball&nbsp;archive:</p>
+<div class="codehilite"><pre><span></span><span class="gp">$ </span>curl -sO https://media.luffy.cx/files/lldpd/lldpd-1.0.16.tar.gz
+<span class="gp">$ </span>curl -sO https://media.luffy.cx/files/lldpd/lldpd-1.0.16.tar.gz.gpg
+<span class="gp">$ </span>curl -s https://media.bernat.ch/files/gpg.txt <span class="p">|</span> gpg --import
+<span class="go">gpg: key 95A42FE8353525F9: &quot;Vincent Bernat &lt;bernat@luffy.cx&gt;&quot; not changed</span>
+<span class="go">gpg: Total number processed: 1</span>
+<span class="go">gpg:              unchanged: 1</span>
+<span class="gp">$ </span>gpg --verify lldpd-1.0.16.tar.gz.gpg lldpd-1.0.16.tar.gz
+<span class="go">gpg: Signature made Fri Nov 11 14:31:37 2022 CET</span>
+<span class="go">gpg:                using RSA key AEF2348766F371C689A7360095A42FE8353525F9</span>
+<span class="go">gpg: Good signature from &quot;Vincent Bernat &lt;bernat@luffy.cx&gt;&quot; [ultimate]</span>
+</pre></div>
+
+
+<p>Then, extract and&nbsp;build:</p>
 <div class="codehilite"><pre><span></span><span class="gp">$ </span>tar zxvf lldpd-1.0.16.tar.gz
 <span class="gp">$ </span><span class="nb">cd</span> lldpd-1.0.16
 <span class="gp">$ </span>mkdir build
