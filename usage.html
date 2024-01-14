@@ -16,8 +16,8 @@
        data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_green_007200.png"
        alt="GitHub badge" title="Fork me on GitHub">
 </a>
-<a class="badge latest-version" href="https://media.luffy.cx/files/lldpd/lldpd-1.0.17.tar.gz">
-  <div title="Download latest version of lldpd">1.0.17</div>
+<a class="badge latest-version" href="https://media.luffy.cx/files/lldpd/lldpd-1.0.18.tar.gz">
+  <div title="Download latest version of lldpd">1.0.18</div>
 </a>
 
   <nav>
@@ -52,1034 +52,1054 @@ the daemon. Both parts are documented in their manual&nbsp;pages:</p>
 </ul>
 </div>
 <h1 id="lldpd8">lldpd.8</h1>
-<p>Here is the manual page for <code>lldpd</code> (version&nbsp;1.0.17):</p>
+<p>Here is the manual page for <code>lldpd</code> (version&nbsp;1.0.18):</p>
 <div class='manpage'><div><b><span class="caps">NAME</span></b>
-     <b>lldpd</b> &#8212; <span class="caps">LLDP</span> daemon
+       lldpd &#8212; <span class="caps">LLDP</span> daemon
 
 <b><span class="caps">SYNOPSIS</span></b>
-     <b>lldpd</b> [<b>-dxcseiklrv</b>] [<b>-D</b> <u>debug</u>] [<b>-p</b> <u>pidfile</u>] [<b>-S</b> <u>description</u>]
-           [<b>-P</b> <u>platform</u>] [<b>-X</b> <u>socket</u>] [<b>-m</b> <u>management</u>] [<b>-u</b> <u>file</u>]
-           [<b>-I</b> <u>interfaces</u>] [<b>-C</b> <u>interfaces</u>] [<b>-M</b> <u>class</u>] [<b>-H</b> <u>hide</u>] [<b>-L</b> <u>lldpcli</u>]
-           [<b>-O</b> <u>configfile</u>]
+       <b>lldpd</b>   [<b>-dxcseiklrv</b>]   [<b>-D</b>  <u>debug</u>]  [<b>-p</b>  <u>pidfile</u>]  [<b>-S</b>  <u>description</u>]
+             [<b>-P</b>  <u>platform</u>]  [<b>-X</b>   <u>socket</u>]   [<b>-m</b>   <u>management</u>]   [<b>-u</b>   <u>file</u>]
+             [<b>-I</b>   <u>interfaces</u>]   [<b>-C</b>   <u>interfaces</u>]   [<b>-M</b>  <u>class</u>]  [<b>-H</b>  <u>hide</u>]
+             [<b>-L</b> <u>lldpcli</u>] [<b>-O</b> <u>configfile</u>]
 
 <b><span class="caps">DESCRIPTION</span></b>
-     <b>lldpd</b> is a daemon able to receive and send <u><span class="caps">LLDP</span></u> frames. The Link Layer
-     Discovery Protocol is a vendor-neutral Layer 2 protocol that allows a
-     network device to advertise its identity and capabilities on the local
-     network.
+       <b>lldpd</b> is a daemon able to receive and  send  <u><span class="caps">LLDP</span></u>  frames.  The  Link
+       Layer  Discovery  Protocol  is a vendor-neutral Layer 2 protocol that
+       allows a network device to advertise its identity and capabilities on
+       the local network.
 
-     <b>lldpd</b> also implements an <span class="caps">SNMP</span> subagent using AgentX protocol to inter-
-     face to a regular <span class="caps">SNMP</span> agent like Net-<span class="caps">SNMP</span>. To enable this subagent,
-     you need something like that in your snmpd.conf(5):
+       <b>lldpd</b> also implements an <span class="caps">SNMP</span> subagent using AgentX protocol  to  in-
+       terface  to  a  regular <span class="caps">SNMP</span> agent like Net-<span class="caps">SNMP</span>. To enable this sub-
+       agent, you need something like that in your <u>snmpd.conf</u>(5):
 
-           master agentx
+             master agentx
 
-     This daemon implements both reception and sending. It will collect var-
-     ious information to send <span class="caps">LLDP</span> frames to all Ethernet interfaces, in-
-     cluding management address, speed and <span class="caps">VLAN</span> names.
+       This daemon implements both reception and sending.  It  will  collect
+       various  information  to send <span class="caps">LLDP</span> frames to all Ethernet interfaces,
+       including management address, speed and <span class="caps">VLAN</span> names.
 
-     The options are as follows:
+       The options are as follows:
 
-     <b>-d</b>      Do not daemonize.  If this option is specified, <b>lldpd</b> will run
-             in the foreground. When specified one more time, <b>lldpd</b> will not
-             log to syslog but only to stderr. Then, this option can be
-             specified many times to increase verbosity. When specified four
-             times, debug logs will be enabled. They can be filtered with <b>-D</b>
-             flag.
+       <b>-d</b>      Do not daemonize.  If this option is  specified,  <b>lldpd</b>  will
+               run  in  the  foreground. When specified one more time, <b>lldpd</b>
+               will not log to syslog but only to stderr. Then, this  option
+               can be specified many times to increase verbosity. When spec-
+               ified  four  times,  debug  logs will be enabled. They can be
+               filtered with <b>-D</b> flag.
 
-     <b>-D</b> <u>debug</u>
-             This option allows the user to filter out debugging information
-             by specifying allowed tokens. This option can be repeated sev-
-             eral times to allow several tokens. This option must be com-
-             bined with the <b>-d</b> flag to have some effect. Only debugging logs
-             can be filtered. Here is a list of allowed tokens with their
-             description:
-                 <b>main</b>        Main daemon.
-                 <b>interfaces</b>  Discovery of local interfaces.
-                 <b>lldp</b>        <span class="caps">LLDP</span> <span class="caps">PDU</span> encoding/decoding.
-                 <b>edp</b>         <span class="caps">EDP</span> <span class="caps">PDU</span> encoding/decoding.
-                 <b>cdp</b>         <span class="caps">CDP</span>/<span class="caps">FDP</span> <span class="caps">PDU</span> encoding/decoding.
-                 <b>sonmp</b>       <span class="caps">SONMP</span> <span class="caps">PDU</span> encoding/decoding.
-                 <b>event</b>       Events management.
-                 <b>libevent</b>    Events management but for logs generated by
-                             libevent.
-                 <b>privsep</b>     Privilege separation.
-                 <b>localchassis</b>
-                             Retrieval of information related to the local
-                             chassis.
-                 <b>rpc</b>         Client communication.
-                 <b>control</b>     Management of the Unix control socket.
-                 <b>snmp</b>        <span class="caps">SNMP</span> subagent.
-                 <b>libsnmp</b>     <span class="caps">SNMP</span> subagent but for logs generated by Net-
-                             <span class="caps">SNMP</span>.
-                 <b>decode</b>      Generic <span class="caps">PDU</span> decoding.
-                 <b>marshal</b>     Low-level serialization mechanisms.
-                 <b>alloc</b>       Low-level allocation mechanisms.
-                 <b>send</b>        Sending <span class="caps">PDU</span> to some interface.
-                 <b>receive</b>     Receiving <span class="caps">PDU</span> from some interface.
-                 <b>loop</b>        Main loop.
-                 <b>smartfilter</b>
-                             Smart filtering of different protocols on the
-                             same port.
-                 <b>netlink</b>     Netlink subsystem.
+       <b>-D</b> <u>debug</u>
+               This option allows the user to filter out debugging  informa-
+               tion  by  specifying  allowed  tokens. This option can be re-
+               peated several times to allow  several  tokens.  This  option
+               must  be  combined with the <b>-d</b> flag to have some effect. Only
+               debugging logs can be filtered. Here is a list of allowed to-
+               kens with their description:
+                   <b>main</b>        Main daemon.
+                   <b>interfaces</b>  Discovery of local interfaces.
+                   <b>lldp</b>        <span class="caps">LLDP</span> <span class="caps">PDU</span> encoding/decoding.
+                   <b>edp</b>         <span class="caps">EDP</span> <span class="caps">PDU</span> encoding/decoding.
+                   <b>cdp</b>         <span class="caps">CDP</span>/<span class="caps">FDP</span> <span class="caps">PDU</span> encoding/decoding.
+                   <b>sonmp</b>       <span class="caps">SONMP</span> <span class="caps">PDU</span> encoding/decoding.
+                   <b>event</b>       Events management.
+                   <b>libevent</b>    Events management but for logs  generated  by
+                               libevent.
+                   <b>privsep</b>     Privilege separation.
+                   <b>localchassis</b>
+                               Retrieval of information related to the local
+                               chassis.
+                   <b>rpc</b>         Client communication.
+                   <b>control</b>     Management of the Unix control socket.
+                   <b>snmp</b>        <span class="caps">SNMP</span> subagent.
+                   <b>libsnmp</b>     <span class="caps">SNMP</span>  subagent but for logs generated by Net-
+                               <span class="caps">SNMP</span>.
+                   <b>decode</b>      Generic <span class="caps">PDU</span> decoding.
+                   <b>marshal</b>     Low-level serialization mechanisms.
+                   <b>alloc</b>       Low-level allocation mechanisms.
+                   <b>send</b>        Sending <span class="caps">PDU</span> to some interface.
+                   <b>receive</b>     Receiving <span class="caps">PDU</span> from some interface.
+                   <b>loop</b>        Main loop.
+                   <b>smartfilter</b>
+                               Smart filtering of different protocols on the
+                               same port.
+                   <b>netlink</b>     Netlink subsystem.
 
-     <b>-p</b> <u>pidfile</u>
-             Use the provided <span class="caps">PID</span> file to record <b>lldpd</b> <span class="caps">PID</span> instead of
-             @LLDPD_PID_FILE@.
+       <b>-p</b> <u>pidfile</u>
+               Use the provided <span class="caps">PID</span> file to  record  <b>lldpd</b>  <span class="caps">PID</span>  instead  of
+               @LLDPD_PID_FILE@.
 
-     <b>-k</b>      Disable advertising of kernel release, version and machine.
-             Kernel name (ie: Linux) will still be shared, and Inventory
-             software version will be set to &#x27;Unknown&#x27;.
+       <b>-k</b>      Disable  advertising  of kernel release, version and machine.
+               Kernel name (ie: Linux) will still be shared,  and  Inventory
+               software version will be set to &#x27;Unknown&#x27;.
 
-     <b>-S</b> <u>description</u>
-             Override system description with the provided description. The
-             default description is the kernel name, the node name, the ker-
-             nel version, the build date and the architecture (except if you
-             use the <b>-k</b> flag described above).
+       <b>-S</b> <u>description</u>
+               Override  system  description  with the provided description.
+               The default description is the kernel name,  the  node  name,
+               the  kernel version, the build date and the architecture (ex-
+               cept if you use the <b>-k</b> flag described above).
 
-     <b>-P</b> <u>platform</u>
-             Override the <span class="caps">CDP</span> platform name with the provided value. The de-
-             fault description is the kernel name (Linux).
+       <b>-P</b> <u>platform</u>
+               Override the <span class="caps">CDP</span> platform name with the provided  value.  The
+               default description is the kernel name (Linux).
 
-     <b>-x</b>      Enable <span class="caps">SNMP</span> subagent.  With this option, <b>lldpd</b> will enable an
-             <span class="caps">SNMP</span> subagent using AgentX protocol. This allows you to get in-
-             formation about local system and remote systems through <span class="caps">SNMP</span>.
+       <b>-x</b>      Enable <span class="caps">SNMP</span> subagent.  With this option, <b>lldpd</b> will enable an
+               <span class="caps">SNMP</span>  subagent  using AgentX protocol. This allows you to get
+               information about local system  and  remote  systems  through
+               <span class="caps">SNMP</span>.
 
-     <b>-X</b> <u>socket</u>
-             Enable <span class="caps">SNMP</span> subagent using the specified socket.  <b>lldpd</b> will
-             enable an <span class="caps">SNMP</span> subagent using AgentX protocol for the given
-             socket. This option implies the previous one. The default
-             socket is usually <u>/var/agentx/master</u>.  You can specify a socket
-             like <u>tcp:127.0.0.1:705</u> for example. Since the process that will
-             open this socket is enclosed in a chroot, you need to specify
-             an <span class="caps">IP</span> address (not a hostname) when using a <span class="caps">TCP</span> or <span class="caps">UDP</span> socket.
+       <b>-X</b> <u>socket</u>
+               Enable  <span class="caps">SNMP</span> subagent using the specified socket.  <b>lldpd</b> will
+               enable an <span class="caps">SNMP</span> subagent using AgentX protocol for  the  given
+               socket.  This  option  implies  the previous one. The default
+               socket is usually  <u>/var/agentx/master</u>.   You  can  specify  a
+               socket  like <u>tcp:127.0.0.1:705</u> for example. Since the process
+               that will open this socket is enclosed in a chroot, you  need
+               to specify an <span class="caps">IP</span> address (not a hostname) when using a <span class="caps">TCP</span> or
+               <span class="caps">UDP</span> socket.
 
-     <b>-c</b>      Enable the support of <span class="caps">CDP</span> protocol to deal with Cisco routers
-             that do not speak <span class="caps">LLDP</span>. If repeated, CDPv1 packets will be sent
-             even when there is no <span class="caps">CDP</span> peer detected. If repeated once
-             again, CDPv2 packets will be sent even when there is no <span class="caps">CDP</span>
-             peer detected. If repeated once again (i.e.  <b>-cccc</b>), CDPv1 will
-             be disabled and CDPv2 will be enabled. If repeated once again
-             (i.e.  <b>-ccccc</b>), CDPv1 will be disabled and CDPv2 will be
-             forced.
+       <b>-c</b>      Enable the support of <span class="caps">CDP</span> protocol to deal with Cisco routers
+               that  do  not  speak <span class="caps">LLDP</span>. If repeated, CDPv1 packets will be
+               sent even when there is no <span class="caps">CDP</span>  peer  detected.  If  repeated
+               once  again, CDPv2 packets will be sent even when there is no
+               <span class="caps">CDP</span> peer detected. If  repeated  once  again  (i.e.   <b>-cccc</b>),
+               CDPv1 will be disabled and CDPv2 will be enabled. If repeated
+               once  again  (i.e.  <b>-ccccc</b>), CDPv1 will be disabled and CDPv2
+               will be forced.
 
-     <b>-f</b>      Enable the support of <span class="caps">FDP</span> protocol to deal with Foundry routers
-             that do not speak <span class="caps">LLDP</span>. If repeated, <span class="caps">FDP</span> packets will be sent
-             even when there is no <span class="caps">FDP</span> peer detected.
+       <b>-f</b>      Enable the support of  <span class="caps">FDP</span>  protocol  to  deal  with  Foundry
+               routers that do not speak <span class="caps">LLDP</span>. If repeated, <span class="caps">FDP</span> packets will
+               be sent even when there is no <span class="caps">FDP</span> peer detected.
 
-     <b>-s</b>      Enable the support of <span class="caps">SONMP</span> protocol to deal with Nortel
-             routers and switches that do not speak <span class="caps">LLDP</span>. If repeated, <span class="caps">SONMP</span>
-             packets will be sent even when there is no <span class="caps">SONMP</span> peer detected.
+       <b>-s</b>      Enable  the  support  of  <span class="caps">SONMP</span>  protocol to deal with Nortel
+               routers and switches that do not  speak  <span class="caps">LLDP</span>.  If  repeated,
+               <span class="caps">SONMP</span>  packets  will be sent even when there is no <span class="caps">SONMP</span> peer
+               detected.
 
-     <b>-e</b>      Enable the support of <span class="caps">EDP</span> protocol to deal with Extreme routers
-             and switches that do not speak <span class="caps">LLDP</span>. If repeated, <span class="caps">EDP</span> packets
-             will be sent even when there is no <span class="caps">EDP</span> peer detected.
+       <b>-e</b>      Enable the support of  <span class="caps">EDP</span>  protocol  to  deal  with  Extreme
+               routers and switches that do not speak <span class="caps">LLDP</span>. If repeated, <span class="caps">EDP</span>
+               packets will be sent even when there is no <span class="caps">EDP</span> peer detected.
 
-     <b>-l</b>      Force to send <span class="caps">LLDP</span> packets even when there is no <span class="caps">LLDP</span> peer de-
-             tected but there is a peer speaking another protocol detected.
-             By default, <span class="caps">LLDP</span> packets are sent when there is a peer speaking
-             <span class="caps">LLDP</span> detected or when there is no peer at all. If repeated,
-             <span class="caps">LLDP</span> is disabled.
+       <b>-l</b>      Force  to  send  <span class="caps">LLDP</span> packets even when there is no <span class="caps">LLDP</span> peer
+               detected but there is a peer speaking  another  protocol  de-
+               tected.  By  default,  <span class="caps">LLDP</span>  packets are sent when there is a
+               peer speaking <span class="caps">LLDP</span> detected or when there is no peer at  all.
+               If repeated, <span class="caps">LLDP</span> is disabled.
 
-     <b>-r</b>      Receive-only mode. With this switch, <b>lldpd</b> will not send any
-             frame. It will only listen to neighbors.
+       <b>-r</b>      Receive-only  mode. With this switch, <b>lldpd</b> will not send any
+               frame. It will only listen to neighbors.
 
-     <b>-m</b> <u>management</u>
-             Specify the management addresses of this system. As for inter-
-             faces (described below), this option can use wildcards and in-
-             versions.  Without this option, the first IPv4 and the first
-             IPv6 are used. If an exact <span class="caps">IP</span> address is provided, it is used
-             as a management address without any check. If only negative
-             patterns are provided, only one IPv4 and one IPv6 addresses are
-             chosen. Otherwise, many of them can be selected. If you want to
-             remove IPv6 addresses, you can use <u>!*:*</u>.  If an interface name
-             is matched, the first IPv4 address and the first IPv6 address
-             associated to this interface will be chosen.
+       <b>-m</b> <u>management</u>
+               Specify the management addresses of this system. As  for  in-
+               terfaces (described below), this option can use wildcards and
+               inversions.   Without  this  option,  the  first IPv4 and the
+               first IPv6 are used. If an exact <span class="caps">IP</span> address is  provided,  it
+               is  used  as  a management address without any check. If only
+               negative patterns are provided, only one IPv4  and  one  IPv6
+               addresses  are  chosen.  Otherwise,  many  of them can be se-
+               lected. If you want to remove IPv6  addresses,  you  can  use
+               <u>!*:*</u>.   If  an  interface name is matched, the first IPv4 ad-
+               dress and the first IPv6 address associated to this interface
+               will be chosen.
 
-     <b>-u</b> <u>file</u>
-             Specify the Unix-domain socket used for communication with
-             lldpctl(8).
+       <b>-u</b> <u>file</u>
+               Specify the Unix-domain socket used  for  communication  with
+               <u>lldpctl</u>(8).
 
-     <b>-I</b> <u>interfaces</u>
-             Specify which interface to listen and send <span class="caps">LLDPDU</span> to. Without
-             this option, <b>lldpd</b> will use all available physical interfaces.
-             This option can use wildcards. Several interfaces can be speci-
-             fied separated by commas.  It is also possible to remove an in-
-             terface by prefixing it with an exclamation mark. It is possi-
-             ble to allow an interface by prefixing it with two exclamation
-             marks. An allowed interface beats a forbidden interface which
-             beats a simple matched interface. For example, with
-             <u>eth*,!eth1,!eth2</u> <b>lldpd</b> will only use interfaces starting by <u>eth</u>
-             with the exception of <u>eth1</u> and <u>eth2</u>.  While with <u>*,!eth*,!!eth1</u>
-             <b>lldpd</b> will use all interfaces, except interfaces starting by
-             <u>eth</u> with the exception of <u>eth1</u>.  When an exact match is found,
-             it will circumvent some tests. For example, if <u>eth0.12</u> is spec-
-             ified, it will be accepted even if this is a <span class="caps">VLAN</span> interface.
+       <b>-I</b> <u>interfaces</u>
+               Specify which interface to listen and send <span class="caps">LLDPDU</span> to. Without
+               this  option,  <b>lldpd</b>  will  use all available physical inter-
+               faces. This option can use wildcards. Several interfaces  can
+               be specified separated by commas.  It is also possible to re-
+               move  an  interface by prefixing it with an exclamation mark.
+               It is possible to allow an interface by prefixing it with two
+               exclamation marks. An allowed interface beats a forbidden in-
+               terface which beats a simple matched interface. For  example,
+               with <u>eth*,!eth1,!eth2</u> <b>lldpd</b> will only use interfaces starting
+               by  <u>eth</u>  with  the  exception  of  <u>eth1</u> and <u>eth2</u>.  While with
+               <u>*,!eth*,!!eth1</u> <b>lldpd</b> will use all interfaces,  except  inter-
+               faces  starting  by  <u>eth</u> with the exception of <u>eth1</u>.  When an
+               exact match is found, it will circumvent some tests. For  ex-
+               ample,  if  <u>eth0.12</u> is specified, it will be accepted even if
+               this is a <span class="caps">VLAN</span> interface.
 
-     <b>-C</b> <u>interfaces</u>
-             Specify which interfaces to use for computing chassis <span class="caps">ID</span>. With-
-             out this option, all interfaces are considered.  <b>lldpd</b> will
-             take the first <span class="caps">MAC</span> address from all the considered interfaces
-             to compute the chassis <span class="caps">ID</span>. The logic of this option is the same
-             as for <b>-I</b> flag: you can exclude interfaces with an exclamation
-             mark and use globbing to specify several interfaces. If all in-
-             terfaces are removed (with <u>!*</u>), the system name is used as a
-             chassis <span class="caps">ID</span> instead.
+       <b>-C</b> <u>interfaces</u>
+               Specify which interfaces to use  for  computing  chassis  <span class="caps">ID</span>.
+               Without  this  option,  all interfaces are considered.  <b>lldpd</b>
+               will take the first <span class="caps">MAC</span> address from all the  considered  in-
+               terfaces  to compute the chassis <span class="caps">ID</span>. The logic of this option
+               is the same as for <b>-I</b> flag: you can exclude  interfaces  with
+               an  exclamation  mark and use globbing to specify several in-
+               terfaces. If all interfaces are removed (with <u>!*</u>), the system
+               name is used as a chassis <span class="caps">ID</span> instead.
 
-     <b>-M</b> <u>class</u>
-             Enable emission of <span class="caps">LLDP</span>-<span class="caps">MED</span> frame. Depending on the selected
-             class, the standard defines which set of <span class="caps">TLV</span> should be trans-
-             mitted. See section 10.2.1. Some devices may be strict about
-             this aspect. The class should be one of the following value:
-             <b>1</b>     Generic Endpoint (Class I)
-             <b>2</b>     Media Endpoint (Class <span class="caps">II</span>). In this case, the standard re-
-                   quires to define at least one network policy through
-                   <b>lldpcli</b>.
-             <b>3</b>     Communication Device Endpoints (Class <span class="caps">III</span>). In this case,
-                   the standard requires to define at least one network pol-
-                   icy through <b>lldpcli</b>.
-             <b>4</b>     Network Connectivity Device
+       <b>-M</b> <u>class</u>
+               Enable emission of <span class="caps">LLDP</span>-<span class="caps">MED</span> frame. Depending on the  selected
+               class, the standard defines which set of <span class="caps">TLV</span> should be trans-
+               mitted.  See section 10.2.1. Some devices may be strict about
+               this aspect. The class should be one of the following value:
+               <b>1</b>     Generic Endpoint (Class I)
+               <b>2</b>     Media Endpoint (Class <span class="caps">II</span>). In this case,  the  standard
+                     requires  to define at least one network policy through
+                     <b>lldpcli</b>.
+               <b>3</b>     Communication Device Endpoints  (Class  <span class="caps">III</span>).  In  this
+                     case, the standard requires to define at least one net-
+                     work policy through <b>lldpcli</b>.
+               <b>4</b>     Network Connectivity Device
 
-     <b>-i</b>      Disable <span class="caps">LLDP</span>-<span class="caps">MED</span> inventory <span class="caps">TLV</span> transmission.  <b>lldpd</b> will still
-             receive (and publish using <span class="caps">SNMP</span> if enabled) those <span class="caps">LLDP</span>-<span class="caps">MED</span> <span class="caps">TLV</span>
-             but will not send them. Use this option if you don&#x27;t want to
-             transmit sensible information like serial numbers.
+       <b>-i</b>      Disable  <span class="caps">LLDP</span>-<span class="caps">MED</span>  inventory  <span class="caps">TLV</span>  transmission.   <b>lldpd</b> will
+               still receive (and publish using <span class="caps">SNMP</span> if enabled) those <span class="caps">LLDP</span>-
+               <span class="caps">MED</span> <span class="caps">TLV</span> but will not send them. Use this option if you  don&#x27;t
+               want to transmit sensible information like serial numbers.
 
-     <b>-H</b> <u>hide</u>
-             Filter neighbors. See section <u><span class="caps">FILTERING</span></u> <u><span class="caps">NEIGHBORS</span></u> for details.
+       <b>-H</b> <u>hide</u>
+               Filter  neighbors.  See section &quot;<span class="caps">FILTERING</span> <span class="caps">NEIGHBORS</span>&quot; for de-
+               tails.
 
-     <b>-L</b> <u>lldpcli</u>
-             Provide an alternative path to <b>lldpcli</b> for configuration. If
-             empty, does not use <b>lldpcli</b> for configuration.
+       <b>-L</b> <u>lldpcli</u>
+               Provide an alternative path to <b>lldpcli</b> for configuration.  If
+               empty, does not use <b>lldpcli</b> for configuration.
 
-     <b>-O</b> <u>configfile</u>
-             Override default configuration locations processed by <b>lldpcli</b>
-             at start. If a directory is provided, each file contained in it
-             will be read if ending by <b>.conf.</b> Order is alphabetical.
+       <b>-O</b> <u>configfile</u>
+               Override default configuration locations processed by <b>lldpcli</b>
+               at  start. If a directory is provided, each file contained in
+               it will be read if ending by <b>.conf.</b> Order is alphabetical.
 
-     <b>-v</b>      Show <b>lldpd</b> version. When repeated, show more build information.
+       <b>-v</b>      Show <b>lldpd</b> version. When repeated, show more  build  informa-
+               tion.
 
 <b><span class="caps">FILTERING</span></b> <b><span class="caps">NEIGHBORS</span></b>
-     In a heterogeneous network, you may see several different hosts on the
-     same port, even if there is only one physically plugged to this port.
-     For example, if you have a Nortel switch running <span class="caps">LLDP</span> which is plugged
-     to a Cisco switch running <span class="caps">CDP</span> and your host is plugged to the Cisco
-     switch, you will see the Nortel switch as well because <span class="caps">LLDP</span> frames are
-     forwarded by the Cisco switch. This may not be what you want. The <b>-H</b>
-     <u>hide</u> parameter will allow you to tell <b>lldpd</b> to discard some frames that
-     it receives and to avoid to send some other frames.
+       In  a  heterogeneous  network, you may see several different hosts on
+       the same port, even if there is only one physically plugged  to  this
+       port.  For example, if you have a Nortel switch running <span class="caps">LLDP</span> which is
+       plugged to a Cisco switch running <span class="caps">CDP</span> and your host is plugged to the
+       Cisco switch, you will see the Nortel switch  as  well  because  <span class="caps">LLDP</span>
+       frames  are  forwarded  by the Cisco switch. This may not be what you
+       want. The <b>-H</b> <u>hide</u> parameter will allow you to tell <b>lldpd</b>  to  discard
+       some frames that it receives and to avoid to send some other frames.
 
-     Incoming filtering and outgoing filtering are unrelated. Incoming fil-
-     tering will hide some remote ports to get you a chance to know exactly
-     what equipment is on the other side of the network cable. Outgoing fil-
-     tering will avoid to use some protocols to avoid flooding your network
-     with a protocol that is not handled by the nearest equipment. Keep in
-     mind that even without filtering, <b>lldpd</b> will speak protocols for which
-     at least one frame has been received and <span class="caps">LLDP</span> otherwise (there are
-     other options to change this behaviour, for example <b>-cc</b>, <b>-ss</b>, <b>-ee</b>, <b>-ll</b>
-     and <b>-ff</b> ).
+       Incoming  filtering  and  outgoing  filtering are unrelated. Incoming
+       filtering will hide some remote ports to get you a chance to know ex-
+       actly what equipment is on the other side of the network cable.  Out-
+       going  filtering  will  avoid to use some protocols to avoid flooding
+       your network with a protocol that  is  not  handled  by  the  nearest
+       equipment. Keep in mind that even without filtering, <b>lldpd</b> will speak
+       protocols  for  which  at  least one frame has been received and <span class="caps">LLDP</span>
+       otherwise (there are other options to change this behaviour, for  ex-
+       ample <b>-cc</b>, <b>-ss</b>, <b>-ee</b>, <b>-ll</b> and <b>-ff</b> ).
 
-     When enabling incoming filtering, <b>lldpd</b> will try to select one protocol
-     and filter out neighbors using other protocols. To select this proto-
-     col, the rule is to take the less used protocol. If on one port, you
-     get 12 <span class="caps">CDP</span> neighbors and 1 <span class="caps">LLDP</span> neighbor, this mean that the remote
-     switch speaks <span class="caps">LLDP</span> and does not filter <span class="caps">CDP</span>. Therefore, we select <span class="caps">LLDP</span>.
-     When enabling outgoing filtering, <b>lldpd</b> will also try to select one
-     protocol and only speaks this protocol. The filtering is done per port.
-     Each port may select a different protocol.
+       When enabling incoming filtering, <b>lldpd</b> will try to select one proto-
+       col  and  filter  out neighbors using other protocols. To select this
+       protocol, the rule is to take the less used protocol. If on one port,
+       you get 12 <span class="caps">CDP</span> neighbors and 1 <span class="caps">LLDP</span> neighbor, this mean that the  re-
+       mote switch speaks <span class="caps">LLDP</span> and does not filter <span class="caps">CDP</span>. Therefore, we select
+       <span class="caps">LLDP</span>. When enabling outgoing filtering, <b>lldpd</b> will also try to select
+       one protocol and only speaks this protocol. The filtering is done per
+       port. Each port may select a different protocol.
 
-     There are two additional criteria when enabling filtering: allowing one
-     or several protocols to be selected (in case of a tie) and allowing one
-     or several neighbors to be selected. Even when allowing several proto-
-     cols, the rule of selecting the protocols with the less neighbors still
-     apply. If <b>lldpd</b> selects <span class="caps">LLDP</span> and <span class="caps">CDP</span>, this means they have the same
-     number of neighbors. The selection of the neighbor is random. Incoming
-     filtering will select a set of neighbors to be displayed while outgoing
-     filtering will use the selected set of neighbors to decide which proto-
-     cols to use: if a selected neighbor speaks <span class="caps">LLDP</span> and another one <span class="caps">CDP</span>,
-     <b>lldpd</b> will speak both <span class="caps">CDP</span> and <span class="caps">LLDP</span> on this port.
+       There  are  two additional criteria when enabling filtering: allowing
+       one or several protocols to be selected (in case of a tie) and allow-
+       ing one or several neighbors to be selected. Even when allowing  sev-
+       eral  protocols,  the  rule  of selecting the protocols with the less
+       neighbors still apply. If <b>lldpd</b> selects <span class="caps">LLDP</span> and <span class="caps">CDP</span>, this means they
+       have the same number of neighbors. The selection of the  neighbor  is
+       random.  Incoming filtering will select a set of neighbors to be dis-
+       played while outgoing filtering will use the selected set  of  neigh-
+       bors  to decide which protocols to use: if a selected neighbor speaks
+       <span class="caps">LLDP</span> and another one <span class="caps">CDP</span>, <b>lldpd</b> will speak both <span class="caps">CDP</span> and <span class="caps">LLDP</span> on  this
+       port.
 
-     There are some corner cases. A typical example is a switch speaking two
-     protocols (<span class="caps">CDP</span> and <span class="caps">LLDP</span> for example). You want to get the information
-     from the best protocol but you want to speak both protocols because
-     some tools use the <span class="caps">CDP</span> table and some other the <span class="caps">LLDP</span> table.
+       There  are  some corner cases. A typical example is a switch speaking
+       two protocols (<span class="caps">CDP</span> and <span class="caps">LLDP</span> for example). You want to get the  infor-
+       mation  from  the  best protocol but you want to speak both protocols
+       because some tools use the <span class="caps">CDP</span> table and some other the <span class="caps">LLDP</span> table.
 
-     The table below summarize all accepted values for the <b>-H</b> <u>hide</u> parame-
-     ter. The default value is <u>15</u> which corresponds to the corner case de-
-     scribed above. The <u>filter</u> column means that filtering is enabled. The
-     <u>1proto</u> column tells that only one protocol will be kept. The <u>1neigh</u>
-     column tells that only one neighbor will be kept.
+       The table below summarize all accepted values for the <b>-H</b> <u>hide</u> parame-
+       ter. The default value is <u>15</u> which corresponds to the corner case de-
+       scribed above. The <u>filter</u> column means that filtering is enabled. The
+       <u>1proto</u> column tells that only one protocol will be kept.  The  <u>1neigh</u>
+       column tells that only one neighbor will be kept.
 
-                        incoming                outgoing
-                <u>filter</u>  <u>1proto</u>  <u>1neigh</u>  <u>filter</u>  <u>1proto</u>  <u>1neigh</u>
-           <u>0</u>
-           <u>1</u>    x       x               x       x
-           <u>2</u>    x       x
-           <u>3</u>                            x       x
-           <u>4</u>    x                       x
-           <u>5</u>    x
-           <u>6</u>                            x
-           <u>7</u>    x       x       x       x       x
-           <u>8</u>    x       x       x
-           <u>9</u>    x               x       x       x
-           <u>10</u>                           x               x
-           <u>11</u>   x               x
-           <u>12</u>   x               x       x               x
-           <u>13</u>   x               x       x
-           <u>14</u>   x       x               x               x
-           <u>15</u>   x       x               x
-           <u>16</u>   x       x       x       x               x
-           <u>17</u>   x       x       x       x
-           <u>18</u>   x                       x               x
-           <u>19</u>   x                       x       x
+                          incoming                outgoing
+                  <u>filter</u>  <u>1proto</u>  <u>1neigh</u>  <u>filter</u>  <u>1proto</u>  <u>1neigh</u>
+             <u>0</u>
+             <u>1</u>    x       x               x       x
+             <u>2</u>    x       x
+             <u>3</u>                            x       x
+             <u>4</u>    x                       x
+             <u>5</u>    x
+             <u>6</u>                            x
+             <u>7</u>    x       x       x       x       x
+             <u>8</u>    x       x       x
+             <u>9</u>    x               x       x       x
+             <u>10</u>                           x               x
+             <u>11</u>   x               x
+             <u>12</u>   x               x       x               x
+             <u>13</u>   x               x       x
+             <u>14</u>   x       x               x               x
+             <u>15</u>   x       x               x
+             <u>16</u>   x       x       x       x               x
+             <u>17</u>   x       x       x       x
+             <u>18</u>   x                       x               x
+             <u>19</u>   x                       x       x
 
 <b><span class="caps">FILES</span></b>
-     @LLDPD_CTL_SOCKET@    Unix-domain socket used for communication with
-                           lldpctl(8).
-     @sysconfdir@/lldpd.conf
-                           Configuration file for <b>lldpd</b>.  Commands in this
-                           files are executed by lldpcli(8) at start.
-     @sysconfdir@/lldpd.d  Directory containing configuration files whose
-                           commands are executed by lldpcli(8) at start.
+       @LLDPD_CTL_SOCKET@    Unix-domain  socket used for communication with
+                             <u>lldpctl</u>(8).
+       @sysconfdir@/lldpd.conf
+                             Configuration file for <b>lldpd</b>.  Commands in this
+                             files are executed by <u>lldpcli</u>(8) at start.
+       @sysconfdir@/lldpd.d  Directory containing configuration files  whose
+                             commands are executed by <u>lldpcli</u>(8) at start.
 
 <b><span class="caps">SEE</span></b> <b><span class="caps">ALSO</span></b>
-     lldpctl(8), lldpcli(8), snmpd(8)
+       <u>lldpctl</u>(8), <u>lldpcli</u>(8), <u>snmpd</u>(8)
 
 <b><span class="caps">HISTORY</span></b>
-     The <b>lldpd</b> program is inspired from a preliminary work of Reyk Floeter.
+       The  <b>lldpd</b>  program  is  inspired  from  a  preliminary  work of Reyk
+       Floeter.
 
 <b><span class="caps">AUTHORS</span></b>
-     The <b>lldpd</b> program was written by Pierre-Yves Ritschard
-     &lt;pyr@openbsd.org&gt;, and Vincent Bernat &lt;bernat@luffy.cx&gt;.</div></div>
+       The   <b>lldpd</b>   program   was   written   by   Pierre-Yves    Ritschard
+       &lt;pyr@openbsd.org&gt;, and Vincent Bernat &lt;bernat@luffy.cx&gt;.</div></div>
 
 <h1 id="lldpcli8">lldpcli.8</h1>
-<p>Here is the manual page for <code>lldpcli</code> and <code>lldpctl</code> (version&nbsp;1.0.17):</p>
+<p>Here is the manual page for <code>lldpcli</code> and <code>lldpctl</code> (version&nbsp;1.0.18):</p>
 <div class='manpage'><div><b><span class="caps">NAME</span></b>
-     <b>lldpcli</b>, <b>lldpctl</b> &#8212; control <span class="caps">LLDP</span> daemon
+       lldpcli, lldpctl &#8212; control <span class="caps">LLDP</span> daemon
 
 <b><span class="caps">SYNOPSIS</span></b>
-     <b>lldpcli</b> [<b>-dv</b>] [<b>-u</b> <u>socket</u>] [<b>-f</b> <u>format</u>] [<b>-c</b> <u>file</u>] [<u>command</u> <u>&#8230;</u>]
-     <b>lldpctl</b> [<b>-dv</b>] [<b>-u</b> <u>socket</u>] [<b>-f</b> <u>format</u>] [<u>interfaces</u> <u>&#8230;</u>]
+       <b>lldpcli</b> [<b>-dv</b>] [<b>-u</b> <u>socket</u>] [<b>-f</b> <u>format</u>] [<b>-c</b> <u>file</u>] [<u>command</u> <u>&#8230;</u>]
+       <b>lldpctl</b> [<b>-dv</b>] [<b>-u</b> <u>socket</u>] [<b>-f</b> <u>format</u>] [<u>interfaces</u> <u>&#8230;</u>]
 
 <b><span class="caps">DESCRIPTION</span></b>
-     The <b>lldpcli</b> program controls lldpd(8) daemon.
+       The <b>lldpcli</b> program controls <u>lldpd</u>(8) daemon.
+
+       When no command is specified, <b>lldpcli</b> will start an interactive shell
+       which  can be used to input arbitrary commands as if they were speci-
+       fied on the command line. This interactive shell should provide  com-
+       pletion and history support.
 
-     When no command is specified, <b>lldpcli</b> will start an interactive shell
-     which can be used to input arbitrary commands as if they were specified
-     on the command line. This interactive shell should provide completion
-     and history support.
+       The options are as follows:
 
-     The options are as follows:
+       <b>-d</b>      Enable more debugging information. This flag can be repeated.
 
-     <b>-d</b>      Enable more debugging information. This flag can be repeated.
+       <b>-u</b> <u>socket</u>
+               Specify  the  Unix-domain  socket used for communication with
+               <u>lldpd</u>(8).
 
-     <b>-u</b> <u>socket</u>
-             Specify the Unix-domain socket used for communication with
-             lldpd(8).
+       <b>-v</b>      Show <b>lldpcli</b> version. When repeated, show more build informa-
+               tion.
 
-     <b>-v</b>      Show <b>lldpcli</b> version. When repeated, show more build informa-
-             tion.
+       <b>-f</b> <u>format</u>
+               Choose the output format. Currently <u>plain</u>, <u>xml</u>,  <u>json</u>,  <u>json0</u>
+               and  <u>keyvalue</u>  formats  are  available. The default is <u>plain</u>.
+               <u>json0</u> is more verbose than <u>json</u> but the structure of the <span class="caps">JSON</span>
+               object is not affected by the number  of  interfaces  or  the
+               number of neighbors. It is therefore easier to parse.
 
-     <b>-f</b> <u>format</u>
-             Choose the output format. Currently <u>plain</u>, <u>xml</u>, <u>json</u>, <u>json0</u> and
-             <u>keyvalue</u> formats are available. The default is <u>plain</u>.  <u>json0</u> is
-             more verbose than <u>json</u> but the structure of the <span class="caps">JSON</span> object is
-             not affected by the number of interfaces or the number of
-             neighbors. It is therefore easier to parse.
+       <b>-c</b> <u>file</u>
+               Read  the  given  configuration  file. This option may be re-
+               peated several times. If a directory is provided,  each  file
+               contained  in  it will be read  if ending by <b>.conf</b>.  Order is
+               alphabetical.
 
-     <b>-c</b> <u>file</u>
-             Read the given configuration file. This option may be repeated
-             several times. If a directory is provided, each file contained
-             in it will be read  if ending by .conf.  Order is alphabetical.
+       When invoked as <b>lldpctl</b>, <b>lldpcli</b> will  display  detailed  information
+       about each neighbors on the specified interfaces or on all interfaces
+       if  none are specified. This command is mostly kept for backward com-
+       patibility with older versions.
 
-     When invoked as <b>lldpctl</b>, <b>lldpcli</b> will display detailed information
-     about each neighbors on the specified interfaces or on all interfaces
-     if none are specified. This command is mostly kept for backward compat-
-     ibility with older versions.
+       The following commands are supported by <b>lldpcli</b>.  When  there  is  no
+       ambiguity,  the  keywords  can  be  abbreviated.  For  example,  <b>show</b>
+       <b>neighbors</b> <b>ports</b> <b>eth0</b> <b>summary</b> and <b>sh</b> <b>neigh</b> <b>p</b> <b>eth0</b>  <b>sum</b>  are  the  same
+       command.
 
-     The following commands are supported by <b>lldpcli</b>.  When there is no am-
-     biguity, the keywords can be abbreviated. For example, <b>show</b> <b>neighbors</b>
-     <b>ports</b> <b>eth0</b> <b>summary</b> and <b>sh</b> <b>neigh</b> <b>p</b> <b>eth0</b> <b>sum</b> are the same command.
+         <b>exit</b>
 
-       <b>exit</b>
+               Quit <b>lldpcli</b>.
 
-             Quit <b>lldpcli</b>.
+         <b>help</b> [&#8230;]
 
-       <b>help</b> [&#8230;]
+               Display general help or help about a command. Also, you can
+               get help using the completion or by pressing the ?  key. How-
+               ever, completion and inline help may be unavailable if
+               <b>lldpcli</b> was compiled without readline support but <b>help</b> com-
+               mand is always available.
 
-             Display general help or help about a command. Also, you can get
-             help using the completion or by pressing the ?  key. However,
-             completion and inline help may be unavailable if <b>lldpcli</b> was
-             compiled without readline support but <b>help</b> command is always
-             available.
+         <b>show</b> <b>neighbors</b> [ports <u>ethX</u> [,&#8230;]] [<b>details</b> | <b>summary</b>] [<b>hidden</b>]
 
-       <b>show</b> <b>neighbors</b> [ports <u>ethX</u> [,&#8230;]] [<b>details</b> | <b>summary</b>] [<b>hidden</b>]
+               Display information about each neighbor known by <u>lldpd</u>(8)
+               daemon. With <b>summary</b>, only the name and the port description
+               of each remote host will be displayed. On the other hand,
+               with <b>details</b>, all available information will be displayed,
+               giving a verbose view. When using <b>hidden</b>, also display remote
+               ports hidden by the smart filter. When specifying one or sev-
+               eral ports, the information displayed is limited to the given
+               list of ports.
 
-             Display information about each neighbor known by lldpd(8) dae-
-             mon. With <b>summary</b>, only the name and the port description of
-             each remote host will be displayed. On the other hand, with
-             <b>details</b>, all available information will be displayed, giving a
-             verbose view. When using <b>hidden</b>, also display remote ports hid-
-             den by the smart filter. When specifying one or several ports,
-             the information displayed is limited to the given list of
-             ports.
+         <b>show</b> <b>interfaces</b> [ports <u>ethX</u> [,&#8230;]] [<b>details</b> | <b>summary</b>] [<b>hidden</b>]
 
-       <b>show</b> <b>interfaces</b> [ports <u>ethX</u> [,&#8230;]] [<b>details</b> | <b>summary</b>] [<b>hidden</b>]
+               Display information about each local interface known by
+               <u>lldpd</u>(8) daemon. With <b>summary</b>, only the name and the port de-
+               scription of each local interface will be displayed. On the
+               other hand, with <b>details</b>, all available information will be
+               displayed, giving a verbose view. When using <b>hidden</b>, also
+               display local ports hidden by the smart filter. When specify-
+               ing one or several ports, the information displayed is lim-
+               ited to the given list of ports.
 
-             Display information about each local interface known by
-             lldpd(8) daemon. With <b>summary</b>, only the name and the port de-
-             scription of each local interface will be displayed. On the
-             other hand, with <b>details</b>, all available information will be
-             displayed, giving a verbose view. When using <b>hidden</b>, also dis-
-             play local ports hidden by the smart filter. When specifying
-             one or several ports, the information displayed is limited to
-             the given list of ports.
+         <b>show</b> <b>chassis</b> [<b>details</b> | <b>summary</b>]
 
-       <b>show</b> <b>chassis</b> [<b>details</b> | <b>summary</b>]
+               Display information about local chassis. With <b>summary</b>, most
+               details are skipped. On the other hand, with <b>details</b>, all
+               available information will be displayed, giving a verbose
+               view.
 
-             Display information about local chassis. With <b>summary</b>, most de-
-             tails are skipped. On the other hand, with <b>details</b>, all avail-
-             able information will be displayed, giving a verbose view.
+         <b>watch</b> [ports <u>ethX</u> [,&#8230;]] [<b>details</b> | <b>summary</b>] [<b>hidden</b>] [<b>limit</b> <u>X</u>]
 
-       <b>watch</b> [ports <u>ethX</u> [,&#8230;]] [<b>details</b> | <b>summary</b>] [<b>hidden</b>] [<b>limit</b> <u>X</u>]
+               Watch for any neighbor changes and report them as soon as
+               they happen. When specifying ports, the changes are only re-
+               ported when happening on the given ports.  <b>hidden</b>, <b>summary</b>
+               and <b>details</b> have the same meaning than previously described.
+               If <b>limit</b> is specified, <b>lldpcli</b> will exit after receiving the
+               specified number of events.
 
-             Watch for any neighbor changes and report them as soon as they
-             happen. When specifying ports, the changes are only reported
-             when happening on the given ports.  <b>hidden</b>, <b>summary</b> and <b>details</b>
-             have the same meaning than previously described. If <b>limit</b> is
-             specified, <b>lldpcli</b> will exit after receiving the specified num-
-             ber of events.
+         <b>show</b> <b>configuration</b>
 
-       <b>show</b> <b>configuration</b>
+               Display global configuration of <u>lldpd</u>(8) daemon.
 
-             Display global configuration of lldpd(8) daemon.
+         <b>show</b> <b>statistics</b> [ports <u>ethX</u> [,&#8230;]] [<b>summary</b>]
 
-       <b>show</b> <b>statistics</b> [ports <u>ethX</u> [,&#8230;]] [<b>summary</b>]
+               Report <span class="caps">LLDP</span>-related statistics, like the number of <span class="caps">LLDPDU</span>
+               transmitted, received, discarded or unrecognized. When speci-
+               fying ports, only the statistics from the given port are re-
+               ported. With <b>summary</b> the statistics of each port is summed.
 
-             Report <span class="caps">LLDP</span>-related statistics, like the number of <span class="caps">LLDPDU</span>
-             transmitted, received, discarded or unrecognized. When specify-
-             ing ports, only the statistics from the given port are re-
-             ported. With <b>summary</b> the statistics of each port is summed.
+         <b>update</b>
 
-       <b>update</b>
+               Make <u>lldpd</u>(8) update its information and send new <span class="caps">LLDP</span> <span class="caps">PDU</span> on
+               all interfaces.
 
-             Make lldpd(8) update its information and send new <span class="caps">LLDP</span> <span class="caps">PDU</span> on
-             all interfaces.
+         <b>configure</b> <b>system</b> <b>hostname</b> <u>name</u>
 
-       <b>configure</b> <b>system</b> <b>hostname</b> <u>name</u>
+               Override system hostname with the provided value. By default,
+               the system name is the <span class="caps">FQDN</span> found from the resolved value of
+               <b>uname</b> <b>-n</b>.  As a special value, use &quot;.&quot; (dot) to use the short
+               hostname instead of a <span class="caps">FQDN</span>.
 
-             Override system hostname with the provided value. By default,
-             the system name is the <span class="caps">FQDN</span> found from the resolved value of
-             <b>uname</b> <b>-n</b>.  As a special value, use &quot;.&quot; (dot) to use the short
-             hostname instead of a <span class="caps">FQDN</span>.
+         <b>unconfigure</b> <b>system</b> <b>hostname</b>
 
-       <b>unconfigure</b> <b>system</b> <b>hostname</b>
+               Do not override system hostname and restore the use of the
+               node name.
 
-             Do not override system hostname and restore the use of the node
-             name.
+         <b>configure</b> <b>system</b> <b>description</b> <u>description</u>
 
-       <b>configure</b> <b>system</b> <b>description</b> <u>description</u>
+               Override chassis description with the provided value instead
+               of using kernel name, node name, kernel version, build date
+               and architecture.
 
-             Override chassis description with the provided value instead of
-             using kernel name, node name, kernel version, build date and
-             architecture.
+         <b>unconfigure</b> <b>system</b> <b>description</b>
 
-       <b>unconfigure</b> <b>system</b> <b>description</b>
+               Do not override chassis description and use a value computed
+               from node name, kernel name, kernel version, build date and
+               architecture instead.
 
-             Do not override chassis description and use a value computed
-             from node name, kernel name, kernel version, build date and ar-
-             chitecture instead.
+         <b>configure</b> <b>system</b> <b>chassisid</b> <u>description</u>
 
-       <b>configure</b> <b>system</b> <b>chassisid</b> <u>description</u>
+               Override chassis <span class="caps">ID</span> with the provided value instead of using
+               <span class="caps">MAC</span> address from one interface or host name.
 
-             Override chassis <span class="caps">ID</span> with the provided value instead of using
-             <span class="caps">MAC</span> address from one interface or host name.
+         <b>unconfigure</b> <b>system</b> <b>chassisid</b>
 
-       <b>unconfigure</b> <b>system</b> <b>chassisid</b>
+               Do not override chassis <span class="caps">ID</span> and use a value computed from one
+               of the interface <span class="caps">MAC</span> address (or host name if none is found).
 
-             Do not override chassis <span class="caps">ID</span> and use a value computed from one of
-             the interface <span class="caps">MAC</span> address (or host name if none is found).
+         <b>configure</b> <b>system</b> <b>platform</b> <u>description</u>
 
-       <b>configure</b> <b>system</b> <b>platform</b> <u>description</u>
+               Override platform description with the provided value instead
+               of using kernel name. This value is currently only used for
+               <span class="caps">CDP</span>.
 
-             Override platform description with the provided value instead
-             of using kernel name. This value is currently only used for
-             <span class="caps">CDP</span>.
+         <b>unconfigure</b> <b>system</b> <b>platform</b>
 
-       <b>unconfigure</b> <b>system</b> <b>platform</b>
+               Do not override platform description and use the kernel name.
+               This option undoes the previous one.
 
-             Do not override platform description and use the kernel name.
-             This option undoes the previous one.
+         <b>configure</b> <b>system</b> <b>capabilities</b> <b>enabled</b> <u>capabilities</u>
 
-       <b>configure</b> <b>system</b> <b>capabilities</b> <b>enabled</b> <u>capabilities</u>
+               Override system capabilities with the provided value instead
+               of using kernel information. Several capabilities can be
+               specified separated by commas. Only available capabilities
+               can be enabled. Valid capabilities are:
+                 <b>other</b>
+                 <b>repeater</b>
+                 <b>bridge</b>
+                 <b>wlan</b>
+                 <b>router</b>
+                 <b>telephone</b>
+                 <b>docsis</b>
+                 <b>station</b>
+               Here is an example of use:
+                     configure system capabilities enabled bridge,router
 
-             Override system capabilities with the provided value instead of
-             using kernel information. Several capabilities can be specified
-             separated by commas. Only available capabilities can be en-
-             abled. Valid capabilities are:
-               <b>other</b>
-               <b>repeater</b>
-               <b>bridge</b>
-               <b>wlan</b>
-               <b>router</b>
-               <b>telephone</b>
-               <b>docsis</b>
-               <b>station</b>
-             Here is an example of use:
-                   configure system capabilities enabled bridge,router
+         <b>unconfigure</b> <b>system</b> <b>capabilities</b> <b>enabled</b>
 
-       <b>unconfigure</b> <b>system</b> <b>capabilities</b> <b>enabled</b>
+               Do not override capabilities and use the kernel information.
+               This option undoes the previous one.
 
-             Do not override capabilities and use the kernel information.
-             This option undoes the previous one.
+         <b>configure</b> <b>system</b> <b>interface</b> <b>pattern</b> <u>pattern</u>
 
-       <b>configure</b> <b>system</b> <b>interface</b> <b>pattern</b> <u>pattern</u>
+               Specify which interface to listen and send <span class="caps">LLDPDU</span> to. Without
+               this option, <b>lldpd</b> will use all available physical inter-
+               faces. This option can use wildcards. Several interfaces can
+               be specified separated by commas.  It is also possible to re-
+               move an interface by prefixing it with an exclamation mark.
+               It is possible to allow an interface by prefixing it with two
+               exclamation marks. An allowed interface beats a forbidden in-
+               terfaces which beats a simple matched interface. For example,
+               with <u>eth*,!eth1,!eth2</u> <b>lldpd</b> will only use interfaces starting
+               by <u>eth</u> with the exception of <u>eth1</u> and <u>eth2</u>.  While with
+               <u>*,!eth*,!!eth1</u> <b>lldpcli</b> will use all interfaces, except inter-
+               faces starting by <u>eth</u> with the exception of <u>eth1</u>.  When an
+               exact match is found, it will circumvent some tests. For ex-
+               ample, if <u>eth0.12</u> is specified, it will be accepted even if
+               this is a <span class="caps">VLAN</span> interface.
 
-             Specify which interface to listen and send <span class="caps">LLDPDU</span> to. Without
-             this option, <b>lldpd</b> will use all available physical interfaces.
-             This option can use wildcards. Several interfaces can be speci-
-             fied separated by commas.  It is also possible to remove an in-
-             terface by prefixing it with an exclamation mark. It is possi-
-             ble to allow an interface by prefixing it with two exclamation
-             marks. An allowed interface beats a forbidden interfaces which
-             beats a simple matched interface. For example, with
-             <u>eth*,!eth1,!eth2</u> <b>lldpd</b> will only use interfaces starting by <u>eth</u>
-             with the exception of <u>eth1</u> and <u>eth2</u>.  While with <u>*,!eth*,!!eth1</u>
-             <b>lldpcli</b> will use all interfaces, except interfaces starting by
-             <u>eth</u> with the exception of <u>eth1</u>.  When an exact match is found,
-             it will circumvent some tests. For example, if <u>eth0.12</u> is spec-
-             ified, it will be accepted even if this is a <span class="caps">VLAN</span> interface.
+         <b>unconfigure</b> <b>system</b> <b>interface</b> <b>pattern</b>
 
-       <b>unconfigure</b> <b>system</b> <b>interface</b> <b>pattern</b>
+               Remove any previously configured interface pattern and use
+               all physical interfaces. This option undoes the previous one.
 
-             Remove any previously configured interface pattern and use all
-             physical interfaces. This option undoes the previous one.
+         <b>configure</b> <b>system</b> <b>interface</b> <b>permanent</b> <u>pattern</u>
 
-       <b>configure</b> <b>system</b> <b>interface</b> <b>permanent</b> <u>pattern</u>
+               Specify interfaces whose configuration is permanently kept by
+               <b>lldpd</b>.  By default, <b>lldpd</b> disregard any data about interfaces
+               when they are removed from the system (statistics, custom
+               configuration). This option allows one to specify a pattern
+               similar to the interface pattern. If an interface disappear
+               but matches the pattern, its data is kept in memory and
+               reused if the interface reappear at some point. For example,
+               on Linux, one could use the pattern <u>eth*,eno*,enp*</u>, which
+               should match fixed interfaces on most systems.
 
-             Specify interfaces whose configuration is permanently kept by
-             <b>lldpd</b>.  By default, <b>lldpd</b> disregard any data about interfaces
-             when they are removed from the system (statistics, custom con-
-             figuration). This option allows one to specify a pattern simi-
-             lar to the interface pattern. If an interface disappear but
-             matches the pattern, its data is kept in memory and reused if
-             the interface reappear at some point. For example, on Linux,
-             one could use the pattern <u>eth*,eno*,enp*</u>, which should match
-             fixed interfaces on most systems.
+         <b>unconfigure</b> <b>system</b> <b>interface</b> <b>permanent</b>
 
-       <b>unconfigure</b> <b>system</b> <b>interface</b> <b>permanent</b>
+               Remove any previously configured permanent interface pattern.
+               Any interface removed from the system will be forgotten. This
+               option undoes the previous one.
 
-             Remove any previously configured permanent interface pattern.
-             Any interface removed from the system will be forgotten. This
-             option undoes the previous one.
+         <b>configure</b> <b>system</b> <b>interface</b> <b>description</b>
 
-       <b>configure</b> <b>system</b> <b>interface</b> <b>description</b>
+               Some <span class="caps">OS</span> allows the user to set a description for an inter-
+               face. Setting this option will enable <b>lldpd</b> to override this
+               description with the name of the peer neighbor if one is
+               found or with the number of neighbors found.
 
-             Some <span class="caps">OS</span> allows the user to set a description for an interface.
-             Setting this option will enable <b>lldpd</b> to override this descrip-
-             tion with the name of the peer neighbor if one is found or with
-             the number of neighbors found.
+         <b>unconfigure</b> <b>system</b> <b>interface</b> <b>description</b>
 
-       <b>unconfigure</b> <b>system</b> <b>interface</b> <b>description</b>
+               Do not update interface description with the name of the peer
+               neighbor. This option undoes the previous one.
 
-             Do not update interface description with the name of the peer
-             neighbor. This option undoes the previous one.
+         <b>configure</b> <b>system</b> <b>interface</b> <b>promiscuous</b>
 
-       <b>configure</b> <b>system</b> <b>interface</b> <b>promiscuous</b>
+               Enable promiscuous mode on managed interfaces.
 
-             Enable promiscuous mode on managed interfaces.
+               When the interface is not managed any more (or when quitting
+               <b>lldpd</b>), the interface is left in promiscuous mode as it is
+               difficult to know if someone else also put the interface in
+               promiscuous mode.
 
-             When the interface is not managed any more (or when quitting
-             <b>lldpd</b>), the interface is left in promiscuous mode as it is dif-
-             ficult to know if someone else also put the interface in pro-
-             miscuous mode.
+               This option is known to be useful when the remote switch is a
+               Cisco 2960 and the local network card features <span class="caps">VLAN</span> hardware
+               acceleration. In this case, you may not receive <span class="caps">LLDP</span> frames
+               from the remote switch. The most plausible explanation for
+               this is the frame is tagged with some <span class="caps">VLAN</span> (usually <span class="caps">VLAN</span> 1)
+               and your network card is filtering <span class="caps">VLAN</span>. This is not the only
+               available solution to work-around this problem. If you are
+               concerned about performance issues, you can also tag the <span class="caps">VLAN</span>
+               1 on each interface instead.
 
-             This option is known to be useful when the remote switch is a
-             Cisco 2960 and the local network card features <span class="caps">VLAN</span> hardware
-             acceleration. In this case, you may not receive <span class="caps">LLDP</span> frames
-             from the remote switch. The most plausible explanation for this
-             is the frame is tagged with some <span class="caps">VLAN</span> (usually <span class="caps">VLAN</span> 1) and your
-             network card is filtering <span class="caps">VLAN</span>. This is not the only available
-             solution to work-around this problem. If you are concerned
-             about performance issues, you can also tag the <span class="caps">VLAN</span> 1 on each
-             interface instead.
+               Currently, this option has no effect on anything else than
+               Linux. On other <span class="caps">OS</span>, either disable <span class="caps">VLAN</span> acceleration, tag
+               <span class="caps">VLAN</span> 1 or enable promiscuous mode manually on the interface.
 
-             Currently, this option has no effect on anything else than
-             Linux. On other <span class="caps">OS</span>, either disable <span class="caps">VLAN</span> acceleration, tag <span class="caps">VLAN</span>
-             1 or enable promiscuous mode manually on the interface.
+         <b>unconfigure</b> <b>system</b> <b>interface</b> <b>promiscuous</b>
 
-       <b>unconfigure</b> <b>system</b> <b>interface</b> <b>promiscuous</b>
+               Do not set promiscuous mode on managed interfaces. This op-
+               tion does not disable promiscuous mode on interfaces already
+               using this mode.
 
-             Do not set promiscuous mode on managed interfaces. This option
-             does not disable promiscuous mode on interfaces already using
-             this mode.
+         <b>configure</b> <b>system</b> <b>ip</b> <b>management</b> <b>pattern</b> <u>pattern</u>
 
-       <b>configure</b> <b>system</b> <b>ip</b> <b>management</b> <b>pattern</b> <u>pattern</u>
+               Specify the management addresses of this system. As for in-
+               terfaces (described above), this option can use wildcards and
+               inversions.  Without this option, the first IPv4 and the
+               first IPv6 are used. If an exact <span class="caps">IP</span> address is provided, it
+               is used as a management address without any check. If only
+               negative patterns are provided, only one IPv4 and one IPv6
+               addresses are chosen. Otherwise, many of them can be se-
+               lected. If you want to remove IPv6 addresses, you can use
+               <u>!*:*</u>.  If an interface name is matched, the first IPv4 ad-
+               dress and the first IPv6 address associated to this interface
+               will be chosen.
 
-             Specify the management addresses of this system. As for inter-
-             faces (described above), this option can use wildcards and in-
-             versions.  Without this option, the first IPv4 and the first
-             IPv6 are used. If an exact <span class="caps">IP</span> address is provided, it is used
-             as a management address without any check. If only negative
-             patterns are provided, only one IPv4 and one IPv6 addresses are
-             chosen. Otherwise, many of them can be selected. If you want to
-             remove IPv6 addresses, you can use <u>!*:*</u>.  If an interface name
-             is matched, the first IPv4 address and the first IPv6 address
-             associated to this interface will be chosen.
+         <b>unconfigure</b> <b>system</b> <b>ip</b> <b>management</b> <b>pattern</b>
 
-       <b>unconfigure</b> <b>system</b> <b>ip</b> <b>management</b> <b>pattern</b>
+               Unset any specific pattern for matching management addresses.
+               This option undoes the previous one.
 
-             Unset any specific pattern for matching management addresses.
-             This option undoes the previous one.
+         <b>configure</b> <b>system</b> <b>bond-slave-src-mac-type</b> <u>value</u>
 
-       <b>configure</b> <b>system</b> <b>bond-slave-src-mac-type</b> <u>value</u>
+               Set the type of src mac in lldp frames sent on bond slaves
 
-             Set the type of src mac in lldp frames sent on bond slaves
+               Valid types are:
+                 <b>real</b>  Slave real mac
+                 <b>zero</b>  All zero mac
+                 <b>fixed</b>
+                       An arbitrary fixed value (<b>00:60:08:69:97:ef</b>)
+                 <b>local</b>
+                       Real mac with locally administered bit set. If the
+                       real mac already has the locally administered bit
+                       set, fallback to the fixed value.
 
-             Valid types are:
-               <b>real</b>  Slave real mac
-               <b>zero</b>  All zero mac
-               <b>fixed</b>
-                     An arbitrary fixed value (00:60:08:69:97:ef)
-               <b>local</b>
-                     Real mac with locally administered bit set. If the real
-                     mac already has the locally administered bit set, fall-
-                     back to the fixed value.
+               Default value for <b>bond-slave-src-mac-type</b> is <b>local</b>.  Some
+               switches may complain when using one of the two other possi-
+               ble values (either because <b>00:00:00:00:00:00</b> is not a valid
+               <span class="caps">MAC</span> or because the <span class="caps">MAC</span> address is flapping from one port to
+               another). Using <b>local</b> might lead to a duplicate <span class="caps">MAC</span> address
+               on the network (but this is quite unlikely).
 
-             Default value for <b>bond-slave-src-mac-type</b> is <b>local</b>.  Some
-             switches may complain when using one of the two other possible
-             values (either because 00:00:00:00:00:00 is not a valid <span class="caps">MAC</span> or
-             because the <span class="caps">MAC</span> address is flapping from one port to another).
-             Using <b>local</b> might lead to a duplicate <span class="caps">MAC</span> address on the net-
-             work (but this is quite unlikely).
+         <b>configure</b> <b>system</b> <b>max-neighbors</b> <u>neighbors</u>
 
-       <b>configure</b> <b>system</b> <b>max-neighbors</b> <u>neighbors</u>
+               Change the maximum number of neighbors accepted (for each
+               protocol) on an interface. This is a global value. The de-
+               fault is 32. This setting only applies to future neighbors.
+
+         <b>configure</b> <b>lldp</b> <b>agent-type</b> <b>nearest-bridge</b> | <b>nearest-non-tpmr-bridge</b>
+         | <b>nearest-customer-bridge</b>
 
-             Change the maximum number of neighbors accepted (for each pro-
-             tocol) on an interface. This is a global value. The default is
-             32. This setting only applies to future neighbors.
+               The destination <span class="caps">MAC</span> address used to send <span class="caps">LLDPDU</span> allows an
+               agent to control the propagation of LLDPDUs. By default, the
+               <b>01:80:c2:00:00:0e</b> <span class="caps">MAC</span> address is used and limit the propaga-
+               tion of the <span class="caps">LLDPDU</span> to the nearest bridge (<b>nearest-bridge</b>).
+               To instruct <b>lldpd</b> to use the <b>01:80:c2:00:00:03</b> <span class="caps">MAC</span> address
+               instead, use <b>nearest-nontpmr-bridge</b> instead.  To use the
+               <b>01:80:c2:00:00:00</b> <span class="caps">MAC</span> address instead, use
+               <b>nearest-customer-bridge</b> instead.
 
-       <b>configure</b> <b>lldp</b> <b>agent-type</b> <b>nearest-bridge</b> | <b>nearest-non-tpmr-bridge</b> |
-       <b>nearest-customer-bridge</b>
+         <b>configure</b> <b>lldp</b> <b>capabilities-advertisements</b>
 
-             The destination <span class="caps">MAC</span> address used to send <span class="caps">LLDPDU</span> allows an agent
-             to control the propagation of LLDPDUs. By default, the
-             01:80:c2:00:00:0e <span class="caps">MAC</span> address is used and limit the propagation
-             of the <span class="caps">LLDPDU</span> to the nearest bridge (<b>nearest-bridge</b>).  To in-
-             struct <b>lldpd</b> to use the 01:80:c2:00:00:03 <span class="caps">MAC</span> address instead,
-             use <b>nearest-nontpmr-bridge</b> instead.  To use the
-             01:80:c2:00:00:00 <span class="caps">MAC</span> address instead, use
-             <b>nearest-customer-bridge</b> instead.
+         <b>unconfigure</b> <b>lldp</b> <b>capabilities-advertisements</b>
+
+               Enable or disable advertisements of the chassis capabilities
+               <span class="caps">TLV</span>.
 
-       <b>configure</b> <b>lldp</b> <b>capabilities-advertisements</b>
+         <b>configure</b> <b>lldp</b> <b>management-addresses-advertisements</b>
 
-       <b>unconfigure</b> <b>lldp</b> <b>capabilities-advertisements</b>
+         <b>unconfigure</b> <b>lldp</b> <b>management-addresses-advertisements</b>
 
-             Enable or disable advertisements of the chassis capabilities
-             <span class="caps">TLV</span>.
+               Enable or disable advertisements of the management address
+               <span class="caps">TLV</span>.
 
-       <b>configure</b> <b>lldp</b> <b>management-addresses-advertisements</b>
+         <b>configure</b> <b>lldp</b> <b>portidsubtype</b> <b>ifname</b> | <b>macaddress</b>
 
-       <b>unconfigure</b> <b>lldp</b> <b>management-addresses-advertisements</b>
+         <b>configure</b> [ports <u>ethX</u> [,&#8230;]] <b>lldp</b> <b>portidsubtype</b> <b>local</b> <u>value</u>
 
-             Enable or disable advertisements of the management address <span class="caps">TLV</span>.
-
-       <b>configure</b> <b>lldp</b> <b>portidsubtype</b> <b>ifname</b> | <b>macaddress</b>
-
-       <b>configure</b> [ports <u>ethX</u> [,&#8230;]] <b>lldp</b> <b>portidsubtype</b> <b>local</b> <u>value</u>
-
-             Force port <span class="caps">ID</span> subtype. By default, <b>lldpd</b> will use the <span class="caps">MAC</span> ad-
-             dress as port identifier and the interface name as port de-
-             scription, unless the interface has an alias. In this case, the
-             interface name will be used as port identifier and the descrip-
-             tion will be the interface alias. With this command, you can
-             force the port identifier to be the interface name (with
-             <b>ifname</b>), the <span class="caps">MAC</span> address (with <b>macaddress</b>) or a local value
-             (with <b>value</b>).  In the latest case, the local value should be
-             provided.
-
-       <b>configure</b> [ports <u>ethX</u> [,&#8230;]] <b>lldp</b> <b>portdescription</b> <u>description</u>
-
-             Force port description to the provided string.
-
-       <b>configure</b> <b>lldp</b> <b>tx-interval</b> <u>interval</u>
-
-             Change transmit delay to the specified value in seconds. The
-             transmit delay is the delay between two transmissions of <span class="caps">LLDP</span>
-             <span class="caps">PDU</span>. The default value is 30 seconds. Note: <b>lldpd</b> also starts
-             another system based refresh timer on each port to detect
-             changes such as a hostname. This is the value of the tx-inter-
-             val multiplied by 20.
-
-             You can specify an <b>interval</b> value in milliseconds by appending
-             a &quot;ms&quot; suffix to the figure (e.g.  &quot;configure lldp tx-interval
-             1500ms&quot; is 1.5s, not 1500s). In this case the <span class="caps">TTL</span> for received
-             and sent <span class="caps">LLDP</span> frames is rounded up to the next second. Note:
-             the effective interval can be limited by the operating system
-             capabilities and <span class="caps">CPU</span> speed.
-
-       <b>configure</b> <b>lldp</b> <b>tx-hold</b> <u>hold</u>
-
-             Change transmit hold value to the specified value. This value
-             is used to compute the <span class="caps">TTL</span> of transmitted packets which is the
-             product of this value and of the transmit delay. The default
-             value is 4 and therefore the default <span class="caps">TTL</span> is 120 seconds.
-
-       <b>configure</b> [ports <u>ethX</u> [,&#8230;]] <b>lldp</b> <b>status</b> <u>rx-and-tx</u> | <u>rx-only</u> |
-       <u>tx-only</u> | <u>disabled</u>
-
-             Configure the administrative status of the given port. By de-
-             fault, all ports are configured to be in <u>rx-and-tx</u> mode. This
-             means they can receive and transmit <span class="caps">LLDP</span> frames (as well as
-             other protocols if needed). In <u>rx-only</u> mode, they won&#x27;t emit
-             any frames and in <u>tx-only</u> mode, they won&#x27;t receive any frames.
-             In <u>disabled</u> mode, no frame will be sent and any incoming frame
-             will be discarded. This setting does not override the opera-
-             tional mode of the main daemon. If it is configured in receive-
-             only mode (with the <b>-r</b> flag), setting any transmit mode won&#x27;t
-             have any effect.
-
-       <b>configure</b> [ports <u>ethX</u> [,&#8230;]] <b>lldp</b> <b>vlan-tx</b> <u>vlan</u><b>_</b><u>id</u> [<b>prio</b> <u>priority</u>
-       [<b>dei</b> <u>dei</u>]]
-
-             Configure the given port to send <span class="caps">LLDP</span> frames over a specified
-             <span class="caps">VLAN</span>. With <span class="caps">VLAN</span> Identifier (<span class="caps">VID</span>) as <u>vlan</u><b>_</b><u>id</u>, Priority Code
-             Point (<span class="caps">PCP</span>) as <u>priority</u>, and Drop Eligible Indicator (<span class="caps">DEI</span>) as
-             <u>dei</u>.  <b>lldpd</b> accepts <span class="caps">LLDP</span> frames on all VLANs.
-
-       <b>configure</b> [ports <u>ethX</u> [,&#8230;]] <b>lldp</b> <b>custom-tlv</b> [<b>add</b> | <b>replace</b>] <b>oui</b> <u>oui</u>
-       <b>subtype</b> <u>subtype</u> [<b>oui-info</b> <u>content</u>]
-
-             Emit a custom <span class="caps">TLV</span> for <span class="caps">OUI</span> <u>oui</u>, with subtype <u>subtype</u> and option-
-             ally with the bytes specified in <u>content</u>.  Both <u>oui</u> and <u>content</u>
-             should be a comma-separated list of bytes in hex format.  <u>oui</u>
-             must be exactly 3-byte long.  If <u>add</u> is specified then the <span class="caps">TLV</span>
-             will be added. This is the default action.  If <u>replace</u> is spec-
-             ified then all TLVs with the same <u>oui</u> and <u>subtype</u> will be re-
-             placed.
-
-       <b>unconfigure</b> [ports <u>ethX</u> [,&#8230;]] <b>lldp</b> <b>custom-tlv</b> [<b>oui</b> <u>oui</u>] [<b>subtype</b>
-       <u>subtype</u>]
-
-             When no oui is specified, remove all previously configured cus-
-             tom <span class="caps">TLV</span>.  When <span class="caps">OUI</span> <u>oui</u> and subtype <u>subtype</u> is specified, remove
-             specific instances of custom <span class="caps">TLV</span>.
-
-       <b>configure</b> <b>med</b> <b>fast-start</b> <b>enable</b> | <b>tx-interval</b> <u>interval</u>
-
-             Configure <span class="caps">LLDP</span>-<span class="caps">MED</span> fast start mechanism. When a new <span class="caps">LLDP</span>-<span class="caps">MED</span>-
-             enabled neighbor is detected, fast start allows <b>lldpd</b> to
-             shorten the interval between two <span class="caps">LLDPDU</span>.  <b>enable</b> should enable
-             <span class="caps">LLDP</span>-<span class="caps">MED</span> fast start while <b>tx-interval</b> specifies the interval
-             between two <span class="caps">LLDPDU</span> in seconds. The default interval is 1 sec-
-             ond. Once 4 <span class="caps">LLDPDU</span> have been sent, the fast start mechanism is
-             disabled until a new neighbor is detected.
-
-       <b>unconfigure</b> <b>med</b> <b>fast-start</b>
-
-             Disable <span class="caps">LLDP</span>-<span class="caps">MED</span> fast start mechanism.
-
-       <b>configure</b> [ports <u>ethX</u> [,&#8230;]] <b>med</b> <b>location</b> <b>coordinate</b> <b>latitude</b>
-       <u>latitude</u> <b>longitude</b> <u>longitude</u> <b>altitude</b> <u>altitude</u> <u>unit</u> <b>datum</b> <u>datum</u>
-
-             Advertise a coordinate based location on the given ports (or on
-             all ports if no port is specified). The format of <u>latitude</u> is a
-             decimal floating point number followed either by <u>N</u> or <u>S</u>.  The
-             format of <u>longitude</u> is a decimal floating point number followed
-             either by <u>E</u> or <u>W</u>.  <u>altitude</u> is a decimal floating point number
-             followed either by <u>m</u> when expressed in meters or <u>f</u> when ex-
-             pressed in floors. A space is expected between the floating
-             point number and the unit.  <u>datum</u> is one of those values:
-                     &raquo;   <span class="caps">WGS84</span>
-                     &raquo;   <span class="caps">NAD83</span>
-                     &raquo;   <span class="caps">NAD83</span>/<span class="caps">MLLW</span>
-
-             A valid use of this command is:
-                   configure ports eth0 med location coordinate latitude
-                   48.85667N longitude 2.2014E altitude 117.47 m datum <span class="caps">WGS84</span>
-
-       <b>configure</b> [ports <u>ethX</u> [,&#8230;]] <b>med</b> <b>location</b> <b>address</b> <b>country</b> <u>country</u>
-       [<u>type</u> <u>value</u> [&#8230;]]
-
-             Advertise a civic address on the given ports (or on all ports
-             if no port is specified).  <u>country</u> is the two-letter code rep-
-             resenting the country. The remaining arguments should be paired
-             to form the address. The first member of each pair indicates
-             the type of the second member which is a free-form text. Here
-             is the list of valid types:
-                     &raquo;   language
-                     &raquo;   country-subdivision
-                     &raquo;   county
-                     &raquo;   city
-                     &raquo;   city-division
-                     &raquo;   block
-                     &raquo;   street
-                     &raquo;   direction
-                     &raquo;   trailing-street-suffix
-                     &raquo;   street-suffix
-                     &raquo;   number
-                     &raquo;   number-suffix
-                     &raquo;   landmark
-                     &raquo;   additional
-                     &raquo;   name
-                     &raquo;   zip
-                     &raquo;   building
-                     &raquo;   unit
-                     &raquo;   floor
-                     &raquo;   room
-                     &raquo;   place-type
-                     &raquo;   script
-
-             A valid use of this command is:
-                   configure ports eth1 med location address country <span class="caps">US</span>
-                   street &quot;Commercial Road&quot; city &quot;Roseville&quot;
-
-       <b>configure</b> [ports <u>ethX</u> [,&#8230;]] <b>med</b> <b>location</b> <b>elin</b> <u>number</u>
-
-             Advertise the availability of an <span class="caps">ELIN</span> number. This is used for
-             setting up emergency call. If the provided number is too small,
-             it will be padded with 0. Here is an example of use:
-                   configure ports eth2 med location elin 911
-
-       <b>configure</b> [ports <u>ethX</u> [,&#8230;]] <b>med</b> <b>policy</b> <b>application</b> <u>application</u>
-       [<b>unknown</b>] [<b>tagged</b>] [<b>vlan</b> <u>vlan</u>] [<b>priority</b> <u>priority</u>] [<b>dscp</b> <u>dscp</u>]
-
-             Advertise a specific network policy for the given ports (or for
-             all ports if no port was provided). Only the application type
-             is mandatory.  <u>application</u> should be one of the following val-
-             ues:
-                     &raquo;   voice
-                     &raquo;   voice-signaling
-                     &raquo;   guest-voice
-                     &raquo;   guest-voice-signaling
-                     &raquo;   softphone-voice
-                     &raquo;   video-conferencing
-                     &raquo;   streaming-video
-                     &raquo;   video-signaling
-
-             The <b>unknown</b> flag tells that the network policy for the speci-
-             fied application type is required by the device but is cur-
-             rently unknown. This is used by Endpoint Devices, not by Net-
-             work Connectivity Devices. If not specified, the network policy
-             for the given application type is defined.
-
-             When a <span class="caps">VLAN</span> is specified with <u>vlan</u> tells which 802.1q <span class="caps">VLAN</span> <span class="caps">ID</span>
-             has to be advertised for the network policy. A valid value is
-             between 1 and 4094.  <b>tagged</b> tells the <span class="caps">VLAN</span> should be tagged for
-             the specified application type.
-
-             <u>priority</u> allows one to specify <span class="caps">IEEE</span> 802.1d / <span class="caps">IEEE</span> 802.1p Layer
-             2 Priority, also known as Class of Service (CoS), to be used
-             for the specified application type. This field is usually ig-
-             nored if no <span class="caps">VLAN</span> is specified. The names match 802.1D-2004
-             standard (table G-2). Some more recent standards may use dif-
-             ferent labels. Only the numeric values should be relied upon.
-             The accepted labels are:
-                 <b>1</b>   background
-                 <b>0</b>   best-effort
-                 <b>2</b>   excellent-effort
-                 <b>3</b>   critical-applications
-                 <b>4</b>   video
-                 <b>5</b>   voice
-                 <b>6</b>   internetwork-control
-                 <b>7</b>   network-control
-
-             <u>dscp</u> represents the <span class="caps">DSCP</span> value to be advertised for the given
-             network policy.  DiffServ/Differentiated Services Code Point
-             (<span class="caps">DSCP</span>) value as defined in <span class="caps">IETF</span> <span class="caps">RFC</span> 2474 for the specified ap-
-             plication type. Value: 0 (default per <span class="caps">RFC</span> 2475) through 63.
-             Note: The class selector <span class="caps">DSCP</span> values are backwards compatible
-             for devices that only support the old <span class="caps">IP</span> precedence Type of
-             Service (ToS) format. (See the RFCs for what these values mean)
-
-             A valid use of this command is:
-                   configure med policy application voice vlan 500 priority
-                   voice dscp 46
-
-       <b>configure</b> <b>inventory</b> <b>hardware-revision</b> <u>value</u>
-
-             Override hardware-revision with the provided value. By default,
-             the hardware-revision is fetched from /sys/class/dmi
-
-       <b>unconfigure</b> <b>inventory</b> <b>hardware-revision</b>
-
-             Do not override hardware-revision and restore the use of the
-             /sys/class/dmi value.
-
-       <b>configure</b> <b>inventory</b> <b>software-revision</b> <u>value</u>
-
-             Override software-revision with the provided value. By default,
-             the software-revision is fetched from uname
-
-       <b>unconfigure</b> <b>inventory</b> <b>software-revision</b>
-
-             Do not override software-revision and restore the use of the
-             uname value.
-
-       <b>configure</b> <b>inventory</b> <b>firmware-revision</b> <u>value</u>
-
-             Override firmware-revision with the provided value. By default,
-             the firmware-revision is fetched from /sys/class/dmi
-
-       <b>unconfigure</b> <b>inventory</b> <b>firmware-revision</b>
-
-             Do not override firmware-revision and restore the use of the
-             /sys/class/dmi value.
-
-       <b>configure</b> <b>inventory</b> <b>serial-number</b> <u>value</u>
-
-             Override serial-number with the provided value. By default, the
-             serial-number is fetched from /sys/class/dmi
-
-       <b>unconfigure</b> <b>inventory</b> <b>serial-number</b>
-
-             Do not override serial-number and restore the use of the
-             /sys/class/dmi value.
-
-       <b>configure</b> <b>inventory</b> <b>manufacturer</b> <u>value</u>
-
-             Override manufacturer with the provided value. By default, the
-             manufacturer is fetched from /sys/class/dmi
-
-       <b>unconfigure</b> <b>inventory</b> <b>manufacturer</b>
-
-             Do not override manufacturer and restore the use of the
-             /sys/class/dmi value.
-
-       <b>configure</b> <b>inventory</b> <b>model</b> <u>value</u>
-
-             Override model with the provided value. By default, the model
-             is fetched from /sys/class/dmi
-
-       <b>unconfigure</b> <b>inventory</b> <b>model</b>
-
-             Do not override model and restore the use of the /sys/class/dmi
-             value.
-
-       <b>configure</b> <b>inventory</b> <b>asset</b> <u>value</u>
-
-             Override asset with the provided value. By default, the asset
-             is fetched from /sys/class/dmi
-
-       <b>unconfigure</b> <b>inventory</b> <b>asset</b>
-
-             Do not override asset and restore the use of the /sys/class/dmi
-             value.
-
-       <b>configure</b> [ports <u>ethX</u> [,&#8230;]] <b>med</b> <b>power</b> <b>pse</b> | <b>pd</b> <b>source</b> <u>source</u>
-       <b>priority</b> <u>priority</u> <b>value</b> <u>value</u>
-
-             Advertise the <span class="caps">LLDP</span>-<span class="caps">MED</span> <span class="caps">POE</span>-<span class="caps">MDI</span> <span class="caps">TLV</span> for the given ports or for
-             all interfaces if no port is provided.  One can act as a <span class="caps">PD</span>
-             (power consumer) or a <span class="caps">PSE</span> (power provider). No check is done on
-             the validity of the parameters while <span class="caps">LLDP</span>-<span class="caps">MED</span> requires some re-
-             strictions:
-
-             &raquo;   <span class="caps">PD</span> shall never request more power than physical 802.3af
-                 class.
-
-             &raquo;   <span class="caps">PD</span> shall never draw more than the maximum power advertised
-                 by <span class="caps">PSE</span>.
-
-             &raquo;   <span class="caps">PSE</span> shall not reduce power allocated to <span class="caps">PD</span> when this power
-                 is in use.
-
-             &raquo;   <span class="caps">PSE</span> may request reduced power using conservation mode
-
-             &raquo;   Being <span class="caps">PSE</span> or <span class="caps">PD</span> is a global parameter, not a per-port pa-
-                 rameter.  <b>lldpcli</b> does not enforce this: a port can be set
-                 as <span class="caps">PD</span> or <span class="caps">PSE</span>. <span class="caps">LLDP</span>-<span class="caps">MED</span> also requires for a <span class="caps">PSE</span> to only have
-                 one power source (primary or backup). Again, <b>lldpcli</b> does
-                 not enforce this. Each port can have its own power source.
-                 The same applies for <span class="caps">PD</span> and power priority. <span class="caps">LLDP</span>-<span class="caps">MED</span> <span class="caps">MIB</span>
-                 does not allow this kind of representation.
-
-             Valid types are:
-               <b>pse</b>   Power Sourcing Entity (power provider)
-               <b>pd</b>    Power Device (power consumer)
-
-             Valid sources are:
-               <b>unknown</b>  Unknown
-               <b>primary</b>  For <span class="caps">PSE</span>, the power source is the primary power
-                        source.
-               <b>backup</b>   For <span class="caps">PSE</span>, the power source is the backup power source
-                        or a power conservation mode is asked (the <span class="caps">PSE</span> may
-                        be running on <span class="caps">UPS</span> for example).
-               <b>pse</b>      For <span class="caps">PD</span>, the power source is the <span class="caps">PSE</span>.
-               <b>local</b>    For <span class="caps">PD</span>, the power source is a local source.
-               <b>both</b>     For <span class="caps">PD</span>, the power source is both the <span class="caps">PSE</span> and a local
-                        source.
-
-             Valid priorities are:
-               <b>unknown</b>    Unknown priority
-               <b>critical</b>   Critical
-               <b>high</b>       High
-               <b>low</b>        Low
-
-             <u>value</u> should be the total power in milliwatts required by the
-             <span class="caps">PD</span> device or available by the <span class="caps">PSE</span> device.
-
-             Here is an example of use:
-                   configure med power pd source pse priority high value
-                   5000
-
-       <b>configure</b> [ports <u>ethX</u> [,&#8230;]] <b>dot3</b> <b>power</b> <b>pse</b> | <b>pd</b> [<b>supported</b>]
-       [<b>enabled</b>] [<b>paircontrol</b>] <b>powerpairs</b> <u>powerpairs</u> [<b>class</b> <u>class</u>] [<b>type</b>
-       <u>type</u> <b>source</b> <u>source</u> <b>priority</b> <u>priority</u> <b>requested</b> <u>requested</u> <b>allocated</b>
-       <u>allocated</u>]
-
-             Advertise Dot3 <span class="caps">POE</span>-<span class="caps">MDI</span> <span class="caps">TLV</span> for the given port or for all ports
-             if none was provided. One can act as a <span class="caps">PD</span> (power consumer) or a
-             <span class="caps">PSE</span> (power provider). This configuration is distinct of the
-             configuration of the transmission of the <span class="caps">LLDP</span>-<span class="caps">MED</span> <span class="caps">POE</span>-<span class="caps">MDI</span> <span class="caps">TLV</span>
-             but the user should ensure the coherency of those two configu-
-             rations if they are used together.
-
-             <u>supported</u> means that <span class="caps">MDI</span> power is supported on the given port
-             while <u>enabled</u> means that <span class="caps">MDI</span> power is enabled.  <u>paircontrol</u> is
-             used to indicate if pair selection can be controlled. Valid
-             values for <u>powerpairs</u> are:
-               <b>signal</b>  The signal pairs only are in use.
-               <b>spare</b>   The spare pairs only are in use.
-
-             When specified, <u>class</u> is a number between 0 and 4.
-
-             The remaining parameters are in conformance with 802.3at and
-             are optional.  <u>type</u> should be either 1 or 2, indicating which
-             if the device conforms to 802.3at type 1 or 802.3at type 2.
-             Values of <u>source</u> and <u>priority</u> are the same as for <span class="caps">LLDP</span>-<span class="caps">MED</span> <span class="caps">POE</span>-
-             <span class="caps">MDI</span> <span class="caps">TLV</span>.  <u>requested</u> and <u>allocated</u> are expressed in milliwats.
-
-             Here are two valid uses of this command:
-                   configure ports eth3 dot3 power pse supported enabled
-                   paircontrol powerpairs spare class class-3
-                   configure dot3 power pd supported enabled powerpairs
-                   spare class class-3 type 1 source pse priority low
-                   requested 10000 allocated 15000
-
-       <b>pause</b>
-
-             Pause <b>lldpd</b> operations.  <b>lldpd</b> will not send any more frames or
-             receive ones. This can be undone with <b>resume</b> command. This only
-             works interactively as lldpd asks lldpcli to unpause after
-             reading the configuration file.
-
-       <b>resume</b>
-
-             Resume <b>lldpd</b> operations.  <b>lldpd</b> will start to send and receive
-             frames. This command is issued internally after processing con-
-             figuration but can be used at any time if a manual <b>pause</b> com-
-             mand is issued.
+               Force port <span class="caps">ID</span> subtype. By default, <b>lldpd</b> will use the <span class="caps">MAC</span> ad-
+               dress as port identifier and the interface name as port de-
+               scription, unless the interface has an alias. In this case,
+               the interface name will be used as port identifier and the
+               description will be the interface alias. With this command,
+               you can force the port identifier to be the interface name
+               (with <b>ifname</b>), the <span class="caps">MAC</span> address (with <b>macaddress</b>) or a local
+               value (with <b>value</b>).  In the latest case, the local value
+               should be provided.
+
+         <b>configure</b> [ports <u>ethX</u> [,&#8230;]] <b>lldp</b> <b>portdescription</b> <u>description</u>
+
+               Force port description to the provided string.
+
+         <b>configure</b> <b>lldp</b> <b>tx-interval</b> <u>interval</u>
+
+               Change transmit delay to the specified value in seconds. The
+               transmit delay is the delay between two transmissions of <span class="caps">LLDP</span>
+               <span class="caps">PDU</span>. The default value is 30 seconds. Note: <b>lldpd</b> also starts
+               another system based refresh timer on each port to detect
+               changes such as a hostname. This is the value of the tx-in-
+               terval multiplied by 20.
+
+               You can specify an <b>interval</b> value in milliseconds by append-
+               ing a &quot;ms&quot; suffix to the figure (e.g.  &quot;configure lldp tx-in-
+               terval 1500ms&quot; is 1.5s, not 1500s). In this case the <span class="caps">TTL</span> for
+               received and sent <span class="caps">LLDP</span> frames is rounded up to the next sec-
+               ond. Note: the effective interval can be limited by the oper-
+               ating system capabilities and <span class="caps">CPU</span> speed.
+
+         <b>configure</b> <b>lldp</b> <b>tx-hold</b> <u>hold</u>
+
+               Change transmit hold value to the specified value. This value
+               is used to compute the <span class="caps">TTL</span> of transmitted packets which is
+               the product of this value and of the transmit delay. The de-
+               fault value is 4 and therefore the default <span class="caps">TTL</span> is 120 sec-
+               onds.
+
+         <b>configure</b> [ports <u>ethX</u> [,&#8230;]] <b>lldp</b> <b>status</b> <u>rx-and-tx</u> | <u>rx-only</u> |
+         <u>tx-only</u> | <u>disabled</u>
+
+               Configure the administrative status of the given port. By de-
+               fault, all ports are configured to be in <u>rx-and-tx</u> mode. This
+               means they can receive and transmit <span class="caps">LLDP</span> frames (as well as
+               other protocols if needed). In <u>rx-only</u> mode, they won&#x27;t emit
+               any frames and in <u>tx-only</u> mode, they won&#x27;t receive any
+               frames. In <u>disabled</u> mode, no frame will be sent and any in-
+               coming frame will be discarded. This setting does not over-
+               ride the operational mode of the main daemon. If it is con-
+               figured in receive-only mode (with the <b>-r</b> flag), setting any
+               transmit mode won&#x27;t have any effect.
+
+         <b>configure</b> [ports <u>ethX</u> [,&#8230;]] <b>lldp</b> <b>vlan-tx</b> <u>vlan</u><b>_</b><u>id</u> [<b>prio</b> <u>priority</u>
+         [<b>dei</b> <u>dei</u>]]
+
+               Configure the given port to send <span class="caps">LLDP</span> frames over a specified
+               <span class="caps">VLAN</span>. With <span class="caps">VLAN</span> Identifier (<span class="caps">VID</span>) as <u>vlan</u><b>_</b><u>id</u>, Priority Code
+               Point (<span class="caps">PCP</span>) as <u>priority</u>, and Drop Eligible Indicator (<span class="caps">DEI</span>) as
+               <u>dei</u>.  <b>lldpd</b> accepts <span class="caps">LLDP</span> frames on all VLANs.
+
+         <b>configure</b> [ports <u>ethX</u> [,&#8230;]] <b>lldp</b> <b>custom-tlv</b> [<b>add</b> | <b>replace</b>] <b>oui</b>
+         <u>oui</u> <b>subtype</b> <u>subtype</u> [<b>oui-info</b> <u>content</u>]
+
+               Emit a custom <span class="caps">TLV</span> for <span class="caps">OUI</span> <u>oui</u>, with subtype <u>subtype</u> and op-
+               tionally with the bytes specified in <u>content</u>.  Both <u>oui</u> and
+               <u>content</u> should be a comma-separated list of bytes in hex for-
+               mat.  <u>oui</u> must be exactly 3-byte long.  If <u>add</u> is specified
+               then the <span class="caps">TLV</span> will be added. This is the default action.  If
+               <u>replace</u> is specified then all TLVs with the same <u>oui</u> and
+               <u>subtype</u> will be replaced.
+
+         <b>unconfigure</b> [ports <u>ethX</u> [,&#8230;]] <b>lldp</b> <b>custom-tlv</b> [<b>oui</b> <u>oui</u>] [<b>subtype</b>
+         <u>subtype</u>]
+
+               When no oui is specified, remove all previously configured
+               custom <span class="caps">TLV</span>.  When <span class="caps">OUI</span> <u>oui</u> and subtype <u>subtype</u> is specified,
+               remove specific instances of custom <span class="caps">TLV</span>.
+
+         <b>configure</b> <b>med</b> <b>fast-start</b> <b>enable</b> | <b>tx-interval</b> <u>interval</u>
+
+               Configure <span class="caps">LLDP</span>-<span class="caps">MED</span> fast start mechanism. When a new <span class="caps">LLDP</span>-<span class="caps">MED</span>-
+               enabled neighbor is detected, fast start allows <b>lldpd</b> to
+               shorten the interval between two <span class="caps">LLDPDU</span>.  <b>enable</b> should en-
+               able <span class="caps">LLDP</span>-<span class="caps">MED</span> fast start while <b>tx-interval</b> specifies the in-
+               terval between two <span class="caps">LLDPDU</span> in seconds. The default interval is
+               1 second. Once 4 <span class="caps">LLDPDU</span> have been sent, the fast start mecha-
+               nism is disabled until a new neighbor is detected.
+
+         <b>unconfigure</b> <b>med</b> <b>fast-start</b>
+
+               Disable <span class="caps">LLDP</span>-<span class="caps">MED</span> fast start mechanism.
+
+         <b>configure</b> [ports <u>ethX</u> [,&#8230;]] <b>med</b> <b>location</b> <b>coordinate</b> <b>latitude</b>
+         <u>latitude</u> <b>longitude</b> <u>longitude</u> <b>altitude</b> <u>altitude</u> <u>unit</u> <b>datum</b> <u>datum</u>
+
+               Advertise a coordinate based location on the given ports (or
+               on all ports if no port is specified). The format of <u>latitude</u>
+               is a decimal floating point number followed either by <u>N</u> or <u>S</u>.
+               The format of <u>longitude</u> is a decimal floating point number
+               followed either by <u>E</u> or <u>W</u>.  <u>altitude</u> is a decimal floating
+               point number followed either by <u>m</u> when expressed in meters or
+               <u>f</u> when expressed in floors. A space is expected between the
+               floating point number and the unit.  <u>datum</u> is one of those
+               values:
+                       &raquo;   <span class="caps">WGS84</span>
+                       &raquo;   <span class="caps">NAD83</span>
+                       &raquo;   <span class="caps">NAD83</span>/<span class="caps">MLLW</span>
+
+               A valid use of this command is:
+                     configure ports eth0 med location coordinate latitude
+                     48.85667N longitude 2.2014E altitude 117.47 m datum
+                     <span class="caps">WGS84</span>
+
+         <b>configure</b> [ports <u>ethX</u> [,&#8230;]] <b>med</b> <b>location</b> <b>address</b> <b>country</b> <u>country</u>
+         [<u>type</u> <u>value</u> [&#8230;]]
+
+               Advertise a civic address on the given ports (or on all ports
+               if no port is specified).  <u>country</u> is the two-letter code
+               representing the country. The remaining arguments should be
+               paired to form the address. The first member of each pair in-
+               dicates the type of the second member which is a free-form
+               text. Here is the list of valid types:
+                       &raquo;   language
+                       &raquo;   country-subdivision
+                       &raquo;   county
+                       &raquo;   city
+                       &raquo;   city-division
+                       &raquo;   block
+                       &raquo;   street
+                       &raquo;   direction
+                       &raquo;   trailing-street-suffix
+                       &raquo;   street-suffix
+                       &raquo;   number
+                       &raquo;   number-suffix
+                       &raquo;   landmark
+                       &raquo;   additional
+                       &raquo;   name
+                       &raquo;   zip
+                       &raquo;   building
+                       &raquo;   unit
+                       &raquo;   floor
+                       &raquo;   room
+                       &raquo;   place-type
+                       &raquo;   script
+
+               A valid use of this command is:
+                     configure ports eth1 med location address country <span class="caps">US</span>
+                     street &quot;Commercial Road&quot; city &quot;Roseville&quot;
+
+         <b>configure</b> [ports <u>ethX</u> [,&#8230;]] <b>med</b> <b>location</b> <b>elin</b> <u>number</u>
+
+               Advertise the availability of an <span class="caps">ELIN</span> number. This is used
+               for setting up emergency call. If the provided number is too
+               small, it will be padded with 0. Here is an example of use:
+                     configure ports eth2 med location elin 911
+
+         <b>configure</b> [ports <u>ethX</u> [,&#8230;]] <b>med</b> <b>policy</b> <b>application</b> <u>application</u>
+         [<b>unknown</b>] [<b>tagged</b>] [<b>vlan</b> <u>vlan</u>] [<b>priority</b> <u>priority</u>] [<b>dscp</b> <u>dscp</u>]
+
+               Advertise a specific network policy for the given ports (or
+               for all ports if no port was provided). Only the application
+               type is mandatory.  <u>application</u> should be one of the follow-
+               ing values:
+                       &raquo;   voice
+                       &raquo;   voice-signaling
+                       &raquo;   guest-voice
+                       &raquo;   guest-voice-signaling
+                       &raquo;   softphone-voice
+                       &raquo;   video-conferencing
+                       &raquo;   streaming-video
+                       &raquo;   video-signaling
+
+               The <b>unknown</b> flag tells that the network policy for the speci-
+               fied application type is required by the device but is cur-
+               rently unknown. This is used by Endpoint Devices, not by Net-
+               work Connectivity Devices. If not specified, the network pol-
+               icy for the given application type is defined.
+
+               When a <span class="caps">VLAN</span> is specified with <u>vlan</u> tells which 802.1q <span class="caps">VLAN</span> <span class="caps">ID</span>
+               has to be advertised for the network policy. A valid value is
+               between 1 and 4094.  <b>tagged</b> tells the <span class="caps">VLAN</span> should be tagged
+               for the specified application type.
+
+               <u>priority</u> allows one to specify <span class="caps">IEEE</span> 802.1d / <span class="caps">IEEE</span> 802.1p
+               Layer 2 Priority, also known as Class of Service (CoS), to be
+               used for the specified application type. This field is usu-
+               ally ignored if no <span class="caps">VLAN</span> is specified. The names match
+               802.1D-2004 standard (table G-2). Some more recent standards
+               may use different labels. Only the numeric values should be
+               relied upon. The accepted labels are:
+                   <b>1</b>   background
+                   <b>0</b>   best-effort
+                   <b>2</b>   excellent-effort
+                   <b>3</b>   critical-applications
+                   <b>4</b>   video
+                   <b>5</b>   voice
+                   <b>6</b>   internetwork-control
+                   <b>7</b>   network-control
+
+               <u>dscp</u> represents the <span class="caps">DSCP</span> value to be advertised for the given
+               network policy.  DiffServ/Differentiated Services Code Point
+               (<span class="caps">DSCP</span>) value as defined in <span class="caps">IETF</span> <span class="caps">RFC</span> 2474 for the specified
+               application type. Value: 0 (default per <span class="caps">RFC</span> 2475) through 63.
+               Note: The class selector <span class="caps">DSCP</span> values are backwards compatible
+               for devices that only support the old <span class="caps">IP</span> precedence Type of
+               Service (ToS) format. (See the RFCs for what these values
+               mean)
+
+               A valid use of this command is:
+                     configure med policy application voice vlan 500
+                     priority voice dscp 46
+
+         <b>configure</b> <b>inventory</b> <b>hardware-revision</b> <u>value</u>
+
+               Override hardware-revision with the provided value. By de-
+               fault, the hardware-revision is fetched from /sys/class/dmi
+
+         <b>unconfigure</b> <b>inventory</b> <b>hardware-revision</b>
+
+               Do not override hardware-revision and restore the use of the
+               /sys/class/dmi value.
+
+         <b>configure</b> <b>inventory</b> <b>software-revision</b> <u>value</u>
+
+               Override software-revision with the provided value. By de-
+               fault, the software-revision is fetched from uname
+
+         <b>unconfigure</b> <b>inventory</b> <b>software-revision</b>
+
+               Do not override software-revision and restore the use of the
+               uname value.
+
+         <b>configure</b> <b>inventory</b> <b>firmware-revision</b> <u>value</u>
+
+               Override firmware-revision with the provided value. By de-
+               fault, the firmware-revision is fetched from /sys/class/dmi
+
+         <b>unconfigure</b> <b>inventory</b> <b>firmware-revision</b>
+
+               Do not override firmware-revision and restore the use of the
+               /sys/class/dmi value.
+
+         <b>configure</b> <b>inventory</b> <b>serial-number</b> <u>value</u>
+
+               Override serial-number with the provided value. By default,
+               the serial-number is fetched from /sys/class/dmi
+
+         <b>unconfigure</b> <b>inventory</b> <b>serial-number</b>
+
+               Do not override serial-number and restore the use of the
+               /sys/class/dmi value.
+
+         <b>configure</b> <b>inventory</b> <b>manufacturer</b> <u>value</u>
+
+               Override manufacturer with the provided value. By default,
+               the manufacturer is fetched from /sys/class/dmi
+
+         <b>unconfigure</b> <b>inventory</b> <b>manufacturer</b>
+
+               Do not override manufacturer and restore the use of the
+               /sys/class/dmi value.
+
+         <b>configure</b> <b>inventory</b> <b>model</b> <u>value</u>
+
+               Override model with the provided value. By default, the model
+               is fetched from /sys/class/dmi
+
+         <b>unconfigure</b> <b>inventory</b> <b>model</b>
+
+               Do not override model and restore the use of the
+               /sys/class/dmi value.
+
+         <b>configure</b> <b>inventory</b> <b>asset</b> <u>value</u>
+
+               Override asset with the provided value. By default, the asset
+               is fetched from /sys/class/dmi
+
+         <b>unconfigure</b> <b>inventory</b> <b>asset</b>
+
+               Do not override asset and restore the use of the
+               /sys/class/dmi value.
+
+         <b>configure</b> [ports <u>ethX</u> [,&#8230;]] <b>med</b> <b>power</b> <b>pse</b> | <b>pd</b> <b>source</b> <u>source</u>
+         <b>priority</b> <u>priority</u> <b>value</b> <u>value</u>
+
+               Advertise the <span class="caps">LLDP</span>-<span class="caps">MED</span> <span class="caps">POE</span>-<span class="caps">MDI</span> <span class="caps">TLV</span> for the given ports or for
+               all interfaces if no port is provided.  One can act as a <span class="caps">PD</span>
+               (power consumer) or a <span class="caps">PSE</span> (power provider). No check is done
+               on the validity of the parameters while <span class="caps">LLDP</span>-<span class="caps">MED</span> requires
+               some restrictions:
+
+               &raquo;   <span class="caps">PD</span> shall never request more power than physical 802.3af
+                   class.
+
+               &raquo;   <span class="caps">PD</span> shall never draw more than the maximum power adver-
+                   tised by <span class="caps">PSE</span>.
+
+               &raquo;   <span class="caps">PSE</span> shall not reduce power allocated to <span class="caps">PD</span> when this
+                   power is in use.
+
+               &raquo;   <span class="caps">PSE</span> may request reduced power using conservation mode
+
+               &raquo;   Being <span class="caps">PSE</span> or <span class="caps">PD</span> is a global parameter, not a per-port pa-
+                   rameter.  <b>lldpcli</b> does not enforce this: a port can be
+                   set as <span class="caps">PD</span> or <span class="caps">PSE</span>. <span class="caps">LLDP</span>-<span class="caps">MED</span> also requires for a <span class="caps">PSE</span> to
+                   only have one power source (primary or backup). Again,
+                   <b>lldpcli</b> does not enforce this. Each port can have its own
+                   power source. The same applies for <span class="caps">PD</span> and power priority.
+                   <span class="caps">LLDP</span>-<span class="caps">MED</span> <span class="caps">MIB</span> does not allow this kind of representation.
+
+               Valid types are:
+                 <b>pse</b>   Power Sourcing Entity (power provider)
+                 <b>pd</b>    Power Device (power consumer)
+
+               Valid sources are:
+                 <b>unknown</b>  Unknown
+                 <b>primary</b>  For <span class="caps">PSE</span>, the power source is the primary power
+                          source.
+                 <b>backup</b>   For <span class="caps">PSE</span>, the power source is the backup power
+                          source or a power conservation mode is asked (the
+                          <span class="caps">PSE</span> may be running on <span class="caps">UPS</span> for example).
+                 <b>pse</b>      For <span class="caps">PD</span>, the power source is the <span class="caps">PSE</span>.
+                 <b>local</b>    For <span class="caps">PD</span>, the power source is a local source.
+                 <b>both</b>     For <span class="caps">PD</span>, the power source is both the <span class="caps">PSE</span> and a lo-
+                          cal source.
+
+               Valid priorities are:
+                 <b>unknown</b>    Unknown priority
+                 <b>critical</b>   Critical
+                 <b>high</b>       High
+                 <b>low</b>        Low
+
+               <u>value</u> should be the total power in milliwatts required by the
+               <span class="caps">PD</span> device or available by the <span class="caps">PSE</span> device.
+
+               Here is an example of use:
+                     configure med power pd source pse priority high value
+                     5000
+
+         <b>configure</b> [ports <u>ethX</u> [,&#8230;]] <b>dot3</b> <b>power</b> <b>pse</b> | <b>pd</b> [<b>supported</b>]
+         [<b>enabled</b>] [<b>paircontrol</b>] <b>powerpairs</b> <u>powerpairs</u> [<b>class</b> <u>class</u>] [<b>type</b>
+         <u>type</u> <b>source</b> <u>source</u> <b>priority</b> <u>priority</u> <b>requested</b> <u>requested</u> <b>allocated</b>
+         <u>allocated</u>]
+
+               Advertise Dot3 <span class="caps">POE</span>-<span class="caps">MDI</span> <span class="caps">TLV</span> for the given port or for all
+               ports if none was provided. One can act as a <span class="caps">PD</span> (power con-
+               sumer) or a <span class="caps">PSE</span> (power provider). This configuration is dis-
+               tinct of the configuration of the transmission of the <span class="caps">LLDP</span>-
+               <span class="caps">MED</span> <span class="caps">POE</span>-<span class="caps">MDI</span> <span class="caps">TLV</span> but the user should ensure the coherency of
+               those two configurations if they are used together.
+
+               <u>supported</u> means that <span class="caps">MDI</span> power is supported on the given port
+               while <u>enabled</u> means that <span class="caps">MDI</span> power is enabled.  <u>paircontrol</u>
+               is used to indicate if pair selection can be controlled.
+               Valid values for <u>powerpairs</u> are:
+                 <b>signal</b>  The signal pairs only are in use.
+                 <b>spare</b>   The spare pairs only are in use.
+
+               When specified, <u>class</u> is a number between 0 and 4.
+
+               The remaining parameters are in conformance with 802.3at and
+               are optional.  <u>type</u> should be either 1 or 2, indicating which
+               if the device conforms to 802.3at type 1 or 802.3at type 2.
+               Values of <u>source</u> and <u>priority</u> are the same as for <span class="caps">LLDP</span>-<span class="caps">MED</span>
+               <span class="caps">POE</span>-<span class="caps">MDI</span> <span class="caps">TLV</span>.  <u>requested</u> and <u>allocated</u> are expressed in milli-
+               wats.
+
+               Here are two valid uses of this command:
+                     configure ports eth3 dot3 power pse supported enabled
+                     paircontrol powerpairs spare class class-3
+                     configure dot3 power pd supported enabled powerpairs
+                     spare class class-3 type 1 source pse priority low
+                     requested 10000 allocated 15000
+
+         <b>pause</b>
+
+               Pause <b>lldpd</b> operations.  <b>lldpd</b> will not send any more frames
+               or receive ones. This can be undone with <b>resume</b> command. This
+               only works interactively as lldpd asks lldpcli to unpause af-
+               ter reading the configuration file.
+
+         <b>resume</b>
+
+               Resume <b>lldpd</b> operations.  <b>lldpd</b> will start to send and re-
+               ceive frames. This command is issued internally after pro-
+               cessing configuration but can be used at any time if a manual
+               <b>pause</b> command is issued.
 
 <b><span class="caps">FILES</span></b>
-     @LLDPD_CTL_SOCKET@    Unix-domain socket used for communication with
-                           lldpd(8).
+       @LLDPD_CTL_SOCKET@    Unix-domain  socket used for communication with
+                             <u>lldpd</u>(8).
 
 <b><span class="caps">SEE</span></b> <b><span class="caps">ALSO</span></b>
-     lldpd(8)
+       <u>lldpd</u>(8)
 
 <b><span class="caps">AUTHORS</span></b>
-     The <b>lldpcli</b> program was written by Vincent Bernat &lt;bernat@luffy.cx&gt;.</div></div>    </div>
+       The <b>lldpcli</b> program was written by Vincent Bernat &lt;bernat@luffy.cx&gt;.</div></div>    </div>
   </article>
 
 </body>
