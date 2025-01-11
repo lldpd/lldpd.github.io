@@ -63,7 +63,7 @@ sources. Once installed, you may want to look
 <h1 id="gnulinux"><span class="caps">GNU</span>/Linux</h1>
 <h2 id="debian-and-ubuntu">Debian and&nbsp;Ubuntu</h2>
 <p><code>lldpd</code> is already available in Debian and Ubuntu. You can install it&nbsp;with:</p>
-<div class="codehilite"><pre><span></span><span class="gp">$ </span>sudo apt-get install lldpd
+<div class="codehilite"><pre><span></span><span class="gp">$ </span>sudo<span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>lldpd
 <span class="go">Reading package lists... Done</span>
 <span class="go">Building dependency tree       </span>
 <span class="go">Reading state information... Done</span>
@@ -102,7 +102,7 @@ the&nbsp;website.</p>
 <h2 id="suse"><span class="caps">SUSE</span></h2>
 <p>On <span class="caps">SLES</span> 12, openSUSE Leap 42.3 or openSUSE Tumbleweed, <code>lldpd</code> is
 available directly with the following&nbsp;command:</p>
-<div class="codehilite"><pre><span></span><span class="gp">$ </span>sudo zypper install lldpd
+<div class="codehilite"><pre><span></span><span class="gp">$ </span>sudo<span class="w"> </span>zypper<span class="w"> </span>install<span class="w"> </span>lldpd
 <span class="go">The following 11 NEW packages are going to be installed:</span>
 <span class="go">  libbsd0 libdb-4_8 libevent-2_0-5 libgdbm4 liblldpctl4 libsensors4 libsnmp30 libwrap0 lldpd perl snmp-mibs</span>
 
@@ -117,11 +117,11 @@ available directly with the following&nbsp;command:</p>
 <p>It is also possible to <a href="#install-from-source">build <em>lldpd</em> from source</a>.</p>
 <h2 id="docker">Docker</h2>
 <p>You can use Docker to run <code>lldpd</code>:</p>
-<div class="codehilite"><pre><span></span><span class="gp">$ </span>docker run --rm --net<span class="o">=</span>host --uts<span class="o">=</span>host <span class="se">\</span>
-           -v /etc/os-release:/etc/os-release <span class="se">\</span>
-           --cap-add<span class="o">=</span>NET_RAW --cap-add<span class="o">=</span>NET_ADMIN <span class="se">\</span>
-           --name lldpd <span class="se">\</span>
-           ghcr.io/lldpd/lldpd:latest
+<div class="codehilite"><pre><span></span><span class="gp">$ </span>docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>--net<span class="o">=</span>host<span class="w"> </span>--uts<span class="o">=</span>host<span class="w"> </span><span class="se">\</span>
+<span class="w">           </span>-v<span class="w"> </span>/etc/os-release:/etc/os-release<span class="w"> </span><span class="se">\</span>
+<span class="w">           </span>--cap-add<span class="o">=</span>NET_RAW<span class="w"> </span>--cap-add<span class="o">=</span>NET_ADMIN<span class="w"> </span><span class="se">\</span>
+<span class="w">           </span>--name<span class="w"> </span>lldpd<span class="w"> </span><span class="se">\</span>
+<span class="w">           </span>ghcr.io/lldpd/lldpd:latest
 </pre></div>
 
 
@@ -129,12 +129,12 @@ available directly with the following&nbsp;command:</p>
 version, you may use <code>1</code>, <code>1.0</code>, <code>1.0.19</code>
 to match specific&nbsp;versions.</p>
 <p>To execute <code>lldpcli</code>,&nbsp;use:</p>
-<div class="codehilite"><pre><span></span><span class="gp">$ </span>docker <span class="nb">exec</span> lldpd lldpcli show neighbors
+<div class="codehilite"><pre><span></span><span class="gp">$ </span>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>lldpd<span class="w"> </span>lldpcli<span class="w"> </span>show<span class="w"> </span>neighbors
 </pre></div>
 
 
 <p>Or to get the&nbsp;command-line:</p>
-<div class="codehilite"><pre><span></span><span class="gp">$ </span>docker <span class="nb">exec</span> -it lldpd lldpcli
+<div class="codehilite"><pre><span></span><span class="gp">$ </span>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>lldpd<span class="w"> </span>lldpcli
 </pre></div>
 
 
@@ -158,7 +158,7 @@ command instead or install the <span class="caps">GNU</span> Readline library on
 <a href="https://media.luffy.cx/files/lldpd/lldpd-1.0.19.pkg" title="lldpd 1.0.19 version for OSX">installer package for macOS</a>. You need at least macOS&nbsp;10.6.</p>
 <p>Alternatively, you can use <a href="http://brew.sh/" title="Homebrew: the missing package manager for macOS">Homebrew</a>. Check the website if you
 don&#8217;t have it, it is easy to install. Once installed, type in a&nbsp;terminal:</p>
-<div class="codehilite"><pre><span></span><span class="gp">$ </span>brew install https://raw.github.com/lldpd/lldpd/master/osx/lldpd.rb
+<div class="codehilite"><pre><span></span><span class="gp">$ </span>brew<span class="w"> </span>install<span class="w"> </span>https://raw.github.com/lldpd/lldpd/master/osx/lldpd.rb
 <span class="gp">#</span><span class="c1">####################################################################### 100.0%</span>
 <span class="go">==&gt; Downloading https://media.luffy.cx/files/lldpd/lldpd-1.0.19.tar.gz</span>
 <span class="go">==&gt; ./configure --prefix=/usr/local/Cellar/lldpd/1.0.19 --with-xml --with-readline</span>
@@ -174,13 +174,13 @@ when the system&nbsp;starts.</p>
 <p>This is the last resort method. Other methods are usually simpler. You need a
 working build&nbsp;environment.</p>
 <p>First, download the tarball&nbsp;archive:</p>
-<div class="codehilite"><pre><span></span><span class="gp">$ </span>curl -sO https://media.luffy.cx/files/lldpd/lldpd-1.0.19.tar.gz
-<span class="gp">$ </span>curl -sO https://media.luffy.cx/files/lldpd/lldpd-1.0.19.tar.gz.gpg
-<span class="gp">$ </span>curl -s  https://media.luffy.cx/files/gpg.txt <span class="p">|</span> gpg --import
+<div class="codehilite"><pre><span></span><span class="gp">$ </span>curl<span class="w"> </span>-sO<span class="w"> </span>https://media.luffy.cx/files/lldpd/lldpd-1.0.19.tar.gz
+<span class="gp">$ </span>curl<span class="w"> </span>-sO<span class="w"> </span>https://media.luffy.cx/files/lldpd/lldpd-1.0.19.tar.gz.gpg
+<span class="gp">$ </span>curl<span class="w"> </span>-s<span class="w">  </span>https://media.luffy.cx/files/gpg.txt<span class="w"> </span><span class="p">|</span><span class="w"> </span>gpg<span class="w"> </span>--import
 <span class="go">gpg: key 95A42FE8353525F9: &quot;Vincent Bernat &lt;bernat@luffy.cx&gt;&quot; not changed</span>
 <span class="go">gpg: Total number processed: 1</span>
 <span class="go">gpg:              unchanged: 1</span>
-<span class="gp">$ </span>gpg --verify lldpd-1.0.19.tar.gz.gpg lldpd-1.0.19.tar.gz
+<span class="gp">$ </span>gpg<span class="w"> </span>--verify<span class="w"> </span>lldpd-1.0.19.tar.gz.gpg<span class="w"> </span>lldpd-1.0.19.tar.gz
 <span class="go">gpg: Signature made Fri Nov 11 14:31:37 2022 CET</span>
 <span class="go">gpg:                using RSA key AEF2348766F371C689A7360095A42FE8353525F9</span>
 <span class="go">gpg: Good signature from &quot;Vincent Bernat &lt;bernat@luffy.cx&gt;&quot; [ultimate]</span>
@@ -188,10 +188,10 @@ working build&nbsp;environment.</p>
 
 
 <p>Then, extract and&nbsp;build:</p>
-<div class="codehilite"><pre><span></span><span class="gp">$ </span>tar zxvf lldpd-1.0.19.tar.gz
-<span class="gp">$ </span><span class="nb">cd</span> lldpd-1.0.19
-<span class="gp">$ </span>mkdir build
-<span class="gp">$ </span><span class="nb">cd</span> build
+<div class="codehilite"><pre><span></span><span class="gp">$ </span>tar<span class="w"> </span>zxvf<span class="w"> </span>lldpd-1.0.19.tar.gz
+<span class="gp">$ </span><span class="nb">cd</span><span class="w"> </span>lldpd-1.0.19
+<span class="gp">$ </span>mkdir<span class="w"> </span>build
+<span class="gp">$ </span><span class="nb">cd</span><span class="w"> </span>build
 <span class="gp">$ </span>../configure
 <span class="go">checking for a BSD-compatible install... /usr/bin/install -c</span>
 <span class="go">checking whether build environment is sane... yes</span>
