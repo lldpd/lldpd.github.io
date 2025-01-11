@@ -1,3 +1,4 @@
+---
 mode: development
 media_root: media
 media_url: /media
@@ -22,8 +23,6 @@ meta:
   default_block: article
 less:
   app: lessc
-  args:
-    compress: ""
 optipng:
   app: optipng
   args:
