@@ -10,6 +10,9 @@
         pythonEnv = pkgs.poetry2nix.mkPoetryEnv {
           projectDir = ./.;
           overrides = pkgs.poetry2nix.overrides.withDefaults (self: super: {
+            pygments = super.pygments.overridePythonAttrs (old: {
+              nativeBuildInputs = old.nativeBuildInputs or [ ] ++ [ self.hatchling ];
+            });
             pytest = super.pytest.overridePythonAttrs (
               old: { doCheck = false; doInstallCheck = false; }
             );
