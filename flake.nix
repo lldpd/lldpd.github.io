@@ -17,12 +17,6 @@
         };
       in
       {
-        apps = {
-          poetry = {
-            type = "app";
-            program = "${pkgs.poetry}/bin/poetry";
-          };
-        };
         devShell = pythonEnv.env.overrideAttrs (oldAttrs: {
           name = "lldpd-website";
           buildInputs = [
@@ -33,6 +27,7 @@
             pkgs.python3Packages.invoke
             pkgs.lessc
             pkgs.optipng
+            pkgs.poetry
           ];
           shellHook = "";
         });
