@@ -16,8 +16,8 @@
        data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_green_007200.png"
        alt="GitHub badge" title="Fork me on GitHub">
 </a>
-<a class="badge latest-version" href="https://media.luffy.cx/files/lldpd/lldpd-1.0.20.tar.gz">
-  <div title="Download latest version of lldpd">1.0.20</div>
+<a class="badge latest-version" href="https://media.luffy.cx/files/lldpd/lldpd-1.0.21.tar.gz">
+  <div title="Download latest version of lldpd">1.0.21</div>
 </a>
 
   <nav>
@@ -52,7 +52,7 @@ the daemon. Both parts are documented in their manual&nbsp;pages:</p>
 </ul>
 </div>
 <h1 id="lldpd8">lldpd.8</h1>
-<p>Here is the manual page for <code>lldpd</code> (version&nbsp;1.0.20):</p>
+<p>Here is the manual page for <code>lldpd</code> (version&nbsp;1.0.21):</p>
 <div class='manpage'><div><b><span class="caps">NAME</span></b>
        lldpd &#8212; <span class="caps">LLDP</span> daemon
 
@@ -360,7 +360,7 @@ the daemon. Both parts are documented in their manual&nbsp;pages:</p>
        &lt;pyr@openbsd.org&gt;, and Vincent Bernat &lt;bernat@luffy.cx&gt;.</div></div>
 
 <h1 id="lldpcli8">lldpcli.8</h1>
-<p>Here is the manual page for <code>lldpcli</code> and <code>lldpctl</code> (version&nbsp;1.0.20):</p>
+<p>Here is the manual page for <code>lldpcli</code> and <code>lldpctl</code> (version&nbsp;1.0.21):</p>
 <div class='manpage'><div><b><span class="caps">NAME</span></b>
        lldpcli, lldpctl &#8212; control <span class="caps">LLDP</span> daemon
 
@@ -713,6 +713,24 @@ the daemon. Both parts are documented in their manual&nbsp;pages:</p>
                <b>ifname</b>), the <span class="caps">MAC</span> address (with <b>macaddress</b>) or a local value
                (with <b>value</b>).  In the latest case, the local value should be
                provided.
+
+         <b>configure</b> <b>lldp</b> <b>portdescription-source</b> <b>auto</b> | <b>ifname</b> | <b>alias</b>
+
+               Select the source used for the port description <span class="caps">TLV</span>. This set-
+               ting affects how the port description is determined when it is
+               not explicitly provided (e.g. with <b>portidsubtype</b> <b>local</b> and a
+               description).
+
+               Valid values are:
+                 <b>auto</b>     Use the interface alias as port description when
+                          the alias is available and the port <span class="caps">ID</span> subtype is
+                          not set to <b>macaddress</b>.  Otherwise, use the inter-
+                          face name. This is the default and preserves the
+                          historical behavior.
+                 <b>ifname</b>   Always use the interface name as port description.
+                 <b>alias</b>    Use the interface alias as port description when
+                          available, regardless of port <span class="caps">ID</span> subtype. Falls
+                          back to the interface name when no alias is set.
 
          <b>configure</b> [ports <u>ethX</u> [,&#8230;]] <b>lldp</b> <b>portdescription</b> <u>description</u>
 
