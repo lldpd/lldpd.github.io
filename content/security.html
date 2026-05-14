@@ -9,6 +9,13 @@ directly.
 
 # Past vulnerabilities
 
+ * [CVE-2026-46433][]: heap out-of-bound read when decapsulating VLAN. This
+   vulnerability affects the parser, which is run in an unprivileged and
+   chrooted process. It does not allow arbitrary code execution but may crash
+   the process if ASan is enabled. This bug has been fixed in commit
+   [ca931be63a9c][] and in version 1.0.22. It has been discovered by
+   TristanInSec.
+
  * [CVE-2021-43612][]: heap overflow when parsing too short SONMP
    packets. This vulnerability affects the parser which is run in an
    unprivileged and chrooted process. It does not allow arbitrary code
@@ -47,12 +54,14 @@ directly.
 [CVE-2015-8011]: http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-8011
 [CVE-2015-8012]: http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-8012
 [CVE-2020-27827]: http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-27827
+[CVE-2026-46433]: https://github.com/lldpd/lldpd/security/advisories/GHSA-2g8p-2h3j-63m3
 [dd4f16e7]: https://github.com/lldpd/lldpd/commit/dd4f16e7e816f2165fba76e3d162cd8d2978dcb2
 [793526f8]: https://github.com/lldpd/lldpd/commit/793526f8884455f43daecd0a2c46772388417a00
 [a8d3c90f]: https://github.com/lldpd/lldpd/commit/a8d3c90feca548fc0656d95b5d278713db86ff61
 [7d60bf30]: https://github.com/lldpd/lldpd/commit/7d60bf30effc4c88f17f3d58ecaa72479f16d4be
 [10b24442]: https://github.com/lldpd/lldpd/commit/10b244425662bbbf056a317965f359fdc036da27
 [73d42680]: https://github.com/lldpd/lldpd/commit/73d42680fce8598324364dbb31b9bc3b8320adf7
+[ca931be63a9c]: https://github.com/lldpd/lldpd/commit/ca931be63a9c
 
 {# Local Variables:      #}
 {# mode: markdown        #}
