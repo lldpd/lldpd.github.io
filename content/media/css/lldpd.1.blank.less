@@ -28,7 +28,29 @@ a {
     position: absolute;
     top: 0;
     right: 0;
-    border: 0;
+    width: 149px;
+    height: 149px;
+    overflow: hidden;
+    span {
+        position: absolute;
+        top: 46px;
+        right: -45px;
+        width: 210px;
+        transform: rotate(45deg);
+        background-color: #007200;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
+        border-top: 1px dashed rgba(255, 255, 255, 0.6);
+        border-bottom: 1px dashed rgba(255, 255, 255, 0.6);
+        outline: 2px solid #007200;
+        color: white;
+        font: bold 12px @font-regular;
+        line-height: 26px;
+        text-align: center;
+        text-shadow: 0 -1px rgba(0, 0, 0, 0.5);
+    }
+    &:hover span {
+        background-color: darken(#007200, 5%);
+    }
 }
 .latest-version {
     position: absolute;
