@@ -349,7 +349,29 @@ a:hover {
   position: absolute;
   top: 0;
   right: 0;
-  border: 0;
+  width: 149px;
+  height: 149px;
+  overflow: hidden;
+}
+.github-forkme span {
+  position: absolute;
+  top: 46px;
+  right: -45px;
+  width: 210px;
+  transform: rotate(45deg);
+  background-color: #007200;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
+  border-top: 1px dashed rgba(255, 255, 255, 0.6);
+  border-bottom: 1px dashed rgba(255, 255, 255, 0.6);
+  outline: 2px solid #007200;
+  color: white;
+  font: bold 12px 'Libre Baskerville', 'Georgia', sans-serif, 'Lucida Grande', 'Lucida Sans Unicode', 'Arial Unicode MS';
+  line-height: 26px;
+  text-align: center;
+  text-shadow: 0 -1px rgba(0, 0, 0, 0.5);
+}
+.github-forkme:hover span {
+  background-color: #005900;
 }
 .latest-version {
   position: absolute;
