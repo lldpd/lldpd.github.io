@@ -9,6 +9,17 @@ directly.
 
 # Past vulnerabilities
 
+ * [GHSA-jmrh-hxvj-p42g][]: heap out-of-bound read in `liblldpctl`
+   when displaying an LLDP-MED location or a chassis or port ID with
+   the address subtype. A remote device can send a malformed LLDP-MED
+   location or address and the client reading it may crash or display
+   bytes from its own memory. The `lldpd` daemon is not affected. For
+   LLDP-MED locations, `lldpcli` is not affected either, only
+   third-party programs using `liblldpctl` to read the location keys.
+   For chassis and port IDs, `lldpcli` is affected. These bugs have
+   been fixed in commits [587da0859d85][] and [f39254f3ef37][] and in
+   version 1.0.23. They have been discovered by [Ali Firas][].
+
  * [CVE-2026-46433][]: heap out-of-bound read when decapsulating VLAN. This
    vulnerability affects the parser, which is run in an unprivileged and
    chrooted process. It does not allow arbitrary code execution but may crash
@@ -55,6 +66,8 @@ directly.
 [CVE-2015-8012]: http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-8012
 [CVE-2020-27827]: http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-27827
 [CVE-2026-46433]: https://github.com/lldpd/lldpd/security/advisories/GHSA-2g8p-2h3j-63m3
+[GHSA-jmrh-hxvj-p42g]: https://github.com/lldpd/lldpd/security/advisories/GHSA-jmrh-hxvj-p42g
+[Ali Firas]: https://github.com/thesmartshadow
 [dd4f16e7]: https://github.com/lldpd/lldpd/commit/dd4f16e7e816f2165fba76e3d162cd8d2978dcb2
 [793526f8]: https://github.com/lldpd/lldpd/commit/793526f8884455f43daecd0a2c46772388417a00
 [a8d3c90f]: https://github.com/lldpd/lldpd/commit/a8d3c90feca548fc0656d95b5d278713db86ff61
@@ -62,6 +75,8 @@ directly.
 [10b24442]: https://github.com/lldpd/lldpd/commit/10b244425662bbbf056a317965f359fdc036da27
 [73d42680]: https://github.com/lldpd/lldpd/commit/73d42680fce8598324364dbb31b9bc3b8320adf7
 [ca931be63a9c]: https://github.com/lldpd/lldpd/commit/ca931be63a9c
+[587da0859d85]: https://github.com/lldpd/lldpd/commit/587da0859d85
+[f39254f3ef37]: https://github.com/lldpd/lldpd/commit/f39254f3ef37
 
 {# Local Variables:      #}
 {# mode: markdown        #}
