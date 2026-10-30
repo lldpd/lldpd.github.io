@@ -142,7 +142,7 @@ terminal:
     ::console
     $ brew install https://raw.github.com/lldpd/lldpd/master/osx/lldpd.rb
     ######################################################################## 100.0%
-    ==> Downloading https://media.luffy.cx/files/lldpd/lldpd-{{ resource.meta.latestversion }}.tar.gz
+    ==> Downloading https://media.bernat.ch/files/lldpd/lldpd-{{ resource.meta.latestversion }}.tar.gz
     ==> ./configure --prefix=/usr/local/Cellar/lldpd/{{ resource.meta.latestversion }} --with-xml --with-readline
     [...]
 
@@ -160,9 +160,9 @@ working build environment.
 First, download the tarball archive:
 
     ::console
-    $ curl -sO https://media.luffy.cx/files/lldpd/lldpd-{{ resource.meta.latestversion }}.tar.gz
-    $ curl -sO https://media.luffy.cx/files/lldpd/lldpd-{{ resource.meta.latestversion }}.tar.gz.gpg
-    $ curl -s  https://media.luffy.cx/files/gpg.txt | gpg --import
+    $ curl -sO https://media.bernat.ch/files/lldpd/lldpd-{{ resource.meta.latestversion }}.tar.gz
+    $ curl -sO https://media.bernat.ch/files/lldpd/lldpd-{{ resource.meta.latestversion }}.tar.gz.gpg
+    $ curl -s  https://media.bernat.ch/files/gpg.txt | gpg --import
     gpg: key 95A42FE8353525F9: "Vincent Bernat <bernat@luffy.cx>" not changed
     gpg: Total number processed: 1
     gpg:              unchanged: 1
@@ -238,8 +238,8 @@ specifics:
 `../configure --help`. The most interesting ones are `--with-snmp` and
 `--with-xml`.
 
-[lasttgz]: https://media.luffy.cx/files/lldpd/lldpd-{{ resource.meta.latestversion }}.tar.gz "lldpd {{ resource.meta.latestversion }} version"
-[lastpkg]: https://media.luffy.cx/files/lldpd/lldpd-{{ resource.meta.latestversion }}.pkg "lldpd {{ resource.meta.latestversion }} version for OSX"
+[lasttgz]: https://media.bernat.ch/files/lldpd/lldpd-{{ resource.meta.latestversion }}.tar.gz "lldpd {{ resource.meta.latestversion }} version"
+[lastpkg]: https://media.bernat.ch/files/lldpd/lldpd-{{ resource.meta.latestversion }}.pkg "lldpd {{ resource.meta.latestversion }} version for OSX"
 [file a bug report]: https://github.com/lldpd/lldpd/issues "GitHub bug tracker for lldpd"
 [Debian backports]: https://backports.debian.org "Debian Backports"
 [openSUSE Build Service]: http://software.opensuse.org/download.html?project=home:vbernat&package=lldpd "lldpd on OSC"
